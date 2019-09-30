@@ -1,3 +1,32 @@
-<p>
-  login works!
-</p>
+<ion-content>
+  <form #form="ngForm" (ngSubmit)="login(form)">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>Login</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input name="name" required minlength="4" type="name" placeholder="Username" ngModel required>
+                  <ion-icon
+                  ></ion-icon>
+              </ion-input>                     
+            </ion-item>
+            <ion-item>
+              <ion-input name="password" required minlength="7" type="password" placeholder="Password" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" expand="block">Login</ion-button>
+          </div>
+          <ion-row>
+            <div text-center>
+              If you don't have an account, please <a routerLink='../signup'> register</a> first!
+            </div>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
