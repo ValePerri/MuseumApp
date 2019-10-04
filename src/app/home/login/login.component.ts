@@ -1,18 +1,52 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { UserService } from '../../services/server/user.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from  '@angular/forms';
+import { Router } from  '@angular/router';
+import { NotificationService} from '../../services/client/notification.service';
+import { IonInput } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['../home.page.scss', './login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
-  logo: string
+  loginForm: FormGroup;
 
-  constructor() {
-
+  constructor(private router: Router, private formBuilder: FormBuilder,private userService: UserService,private notificationService: NotificationService) {
+    this.loginForm = this.formBuilder.group({
+      username: new FormControl('', [
+        Validators.minLength(4),
+        Validators.maxLength(18),
+        Validators.pattern('^[a-zA-Z]+(([\' ][a-zA-Z])?[a-zA-Z]*)*$'),
+        Validators.required
+      ]),
+      password: new FormControl('', [
+        Validators.minLength(8),
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).*$'),
+        Validators.required
+      ])
+  });
    }
 
-  ngOnInit() {}
+   public onLogin(): void {
+    //console.log(true);
+    this.userService.loginWithCredentials({
+      username: this.loginForm.value.username,     
+      password: this.loginForm.value.password
+    }).subscribe(      
+      res => {
+        if(res['exists']){
+          //this.notificationService.showSuccess('Login effettuato!');
+          this.router.navigateByUrl('home');          
+        }else{
+          this.notificationService.showError(res['error']);
+        }
+      }
+    )
+  }
+
+  
 
 }

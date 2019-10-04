@@ -1,5 +1,5 @@
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="login(form)">
+  <form [formGroup]="loginForm" class="login-container" (submit)="onLogin()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
@@ -8,11 +8,11 @@
           </div>
           <div padding>
             <ion-item>
-              <ion-input name="name" required minlength="4" type="name" placeholder="Username" ngModel required>
+              <ion-input #username formControlName="username" required minlength="4" type="username" (keyup.enter)="onLogin()"placeholder="Username">
               </ion-input>                     
             </ion-item>
             <ion-item>
-              <ion-input name="password" required minlength="7" type="password" placeholder="Password" ngModel required></ion-input>
+              <ion-input #password formControlName="password" required="true" type="password" (keyup.enter)="onLogin()" placeholder="Password"></ion-input>
             </ion-item>
           </div>
           <div padding>
