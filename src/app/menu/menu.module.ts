@@ -7,6 +7,7 @@ import { MenuPage } from './menu.page';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ScanComponent } from './scan/scan.component';
 import { AdviceComponent } from './advice/advice.component';
+import { BookingComponent } from './booking/booking.component'
 
 @NgModule({
   imports: [
@@ -32,11 +33,15 @@ import { AdviceComponent } from './advice/advice.component';
             {
                 path: 'aboutus',
                 component: AboutusComponent
+            },
+            {
+                path: 'booking',
+                component: BookingComponent
             }
         ]
     }
     ])
   ],
-  declarations: [MenuPage, AboutusComponent, ScanComponent, AdviceComponent]
+  declarations: [MenuPage, AboutusComponent, ScanComponent, AdviceComponent, BookingComponent]
 })
 export class MenuPageModule {}

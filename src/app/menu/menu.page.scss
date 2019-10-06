@@ -1,7 +1,13 @@
 ion-content {
+    
     --background: transparent;
     background: url('../../assets/back12.jpg');
     background-size: cover;
+    
+    ion-button{
+        font-size: 26px;
+        border-radius: 60px;   
+    }
     
     h1 {
         margin: 60px 0;

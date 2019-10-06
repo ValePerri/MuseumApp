@@ -1,16 +1,53 @@
 <ion-content>
+  <ion-header>
     <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button autoHide="false"></ion-menu-button>
-    
-        </ion-buttons>
-        <ion-buttons slot="secondary">
-          <ion-button>
-            <ion-back-button defaultHref="/"></ion-back-button>
-            <ion-icon slot="icon-only" name="exit"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-        <ion-title>Menù</ion-title>
-      </ion-toolbar>
-  </ion-content>
-              
+      <ion-title>Menù</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-grid>
+    <ion-row justify-content-center>
+      <ion-col size-md="6" size-lg="3" size-xs="20">
+        <ion-button [routerLink]="['/menu/booking']" style="height:100px;width: 350px">
+           Plan your visit
+        </ion-button>
+      </ion-col>
+
+      <ion-col size-md="6" size-lg="3" size-xs="20">
+        <ion-button [routerLink]="['/menu/scan']" style="height:100px;width: 350px">
+            Scan the QR-code
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row justify-content-center>
+    <ion-col size-md="6" size-lg="3" size-xs="20">
+        <ion-button [routerLink]="['/menu/advice']" style="height:100px;width:350px">
+          Receive advices
+       </ion-button>
+      </ion-col>
+      <ion-col align-self-center size-md="6" size-lg="3" size-xs="20">
+        <ion-button [routerLink]="['/home/login']" style="height:100px;width:350px">Logout</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+
+
+</ion-content>
+
+
+
+
+
+<ion-footer translucent="true">
+  <ion-toolbar>
+    <ion-title>Footer</ion-title>
+  </ion-toolbar>
+</ion-footer>

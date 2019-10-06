@@ -39,7 +39,7 @@ export class LoginComponent {
       res => {
         if(res['exists']){
           //this.notificationService.showSuccess('Login effettuato!');
-          this.router.navigateByUrl('home');          
+          this.router.navigateByUrl('menucor');          
         }else{
           this.notificationService.showError(res['error']);
         }
