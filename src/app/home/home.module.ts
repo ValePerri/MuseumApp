@@ -19,7 +19,7 @@ import { LoginComponent } from './login/login.component';
     RouterModule.forChild([
       {
         path: '',
-        component: HomePage
+        component: LoginComponent
       },
       {
         path: 'signup',
@@ -28,7 +28,8 @@ import { LoginComponent } from './login/login.component';
       {
         path: 'login',
         component: LoginComponent
-      }
+      },
+      
     ])
   ],
   declarations: [HomePage, SignupComponent, LoginComponent]

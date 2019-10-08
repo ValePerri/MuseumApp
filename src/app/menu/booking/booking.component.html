@@ -1,10 +1,70 @@
 <ion-content>
-    <ion-header>
-        <ion-toolbar>
-          <ion-title>Menù</ion-title>
-          <ion-buttons slot="start">
-            <ion-menu-button autoHide="false"></ion-menu-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-  </ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menù</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+      <ion-card>
+        <img src="../../../assets/booking.jpg" />
+        <ion-card-header>
+          <ion-icon name="logo-angular" slot="start"></ion-icon>
+          <ion-card-subtitle>Museum Application </ion-card-subtitle>
+          <div text-center>
+            <ion-card-title>
+              <h3>Plan your visit</h3>
+            </ion-card-title>
+          </div>
+        </ion-card-header>
+      </ion-card>
+    </ion-grid>
+
+
+  <form [formGroup]="bookingForm"  class="formGroup" (submit)="onBook()">
+   
+    <div padding>
+      <ion-item padding>
+        <ion-label>Select the data</ion-label>
+        <ion-input formControlName = "date" type = 'date' class="formGroup" displayFormat="DDDD MMM D, YYYY" min="2019-10-10"  max="2021-04-10"  (keyup.enter)="onBook()">
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <div padding>
+      <ion-item padding>
+        <ion-label>Select the day time</ion-label>
+        <ion-input  formControlName = "time" type = "time" class="formGroup" displayFormat="HH:mm" min = "09:00" max = "18:00" (keyup.enter)="onBook()">          
+        </ion-input>
+      </ion-item>
+    </div>
+
+    <div padding>
+        <ion-item padding>
+          <ion-label>Select number of visitors</ion-label>
+          <ion-input formControlName="numpeople" class="formGroup" okText="Okay" cancelText="Dismiss">
+            <ion-select-option value="uno">1</ion-select-option>
+            <ion-select-option value="due">2</ion-select-option>
+            <ion-select-option value="tre">3</ion-select-option>
+            <ion-select-option value="quattro">4</ion-select-option>
+            <ion-select-option value="cinque">5</ion-select-option>
+            <ion-select-option value="sei">6</ion-select-option>
+            <ion-select-option value="sette">7</ion-select-option>
+            <ion-select-option value="otto">8</ion-select-option>
+            <ion-select-option value="nove">9</ion-select-option>
+            <ion-select-option value="dieci">10</ion-select-option>
+          </ion-input>
+        </ion-item>
+    </div>    
+
+    <div text-center>
+      <ion-button  class="formGroup" type="submit"> Book your visit </ion-button>
+    </div>
+  </form>
+
+</ion-content>
+
+

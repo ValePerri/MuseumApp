@@ -1,9 +1,9 @@
 import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { UserService } from '../../services/server/user.service';
-import { FormBuilder, FormGroup, FormControl, Validators } from  '@angular/forms';
-import { Router } from  '@angular/router';
-import { NotificationService} from '../../services/client/notification.service';
-import { IonInput } from '@ionic/angular';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NotificationService } from '../../services/client/notification.service';
+import { StorageService } from '../../services/client/storage.service'
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private router: Router, private formBuilder: FormBuilder,private userService: UserService,private notificationService: NotificationService) {
+  constructor(private storage: StorageService, private router: Router, private formBuilder: FormBuilder, private userService: UserService, private notificationService: NotificationService) {
     this.loginForm = this.formBuilder.group({
       username: new FormControl('', [
         Validators.minLength(4),
@@ -27,26 +27,36 @@ export class LoginComponent {
         Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).*$'),
         Validators.required
       ])
-  });
-   }
+    });
+  }
 
-   public onLogin(): void {
+  public onLogin(): void {
     //console.log(true);
     this.userService.loginWithCredentials({
-      username: this.loginForm.value.username,     
+      username: this.loginForm.value.username,
       password: this.loginForm.value.password
-    }).subscribe(      
+    }).subscribe(
       res => {
-        if(res['exists']){
-          //this.notificationService.showSuccess('Login effettuato!');
-          this.router.navigateByUrl('menucor');          
-        }else{
+        if (res['exists']) {
+          this.notificationService.showSuccess('Login effettuato!');
+          this.storage.setUser({
+            username: this.loginForm.value.username,
+            password: this.loginForm.value.password});
+          this.router.navigateByUrl('');
+        } else {
           this.notificationService.showError(res['error']);
         }
       }
     )
   }
 
-  
+  public logged(): Promise<boolean> {
+    return this.storage.getUser().then(
+      user => {
+        return user !== null;
+      }
+    )
+  }
+
 
 }

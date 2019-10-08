@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { SignupForm } from '../../interfaces/signup-form';
 import { LoginForm } from '../../interfaces/login-form';
+import { bookingForm } from '../../interfaces/booking-form';
 import { User } from '../../interfaces/user';
 import { map } from 'rxjs/operators';
 import { StorageService } from '../client/storage.service';
@@ -34,6 +35,16 @@ export class UserService {
             })
         });
     }
+
+    public booking(data: bookingForm): Observable<User> { 
+        console.log(data)
+        return this.http.post('/booking', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
     
     public logout(): void {
        

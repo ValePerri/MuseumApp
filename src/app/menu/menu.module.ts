@@ -8,11 +8,13 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { ScanComponent } from './scan/scan.component';
 import { AdviceComponent } from './advice/advice.component';
 import { BookingComponent } from './booking/booking.component'
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
       CommonModule,
       IonicModule,
+      ReactiveFormsModule,
       RouterModule.forChild([
       {
         path: '',

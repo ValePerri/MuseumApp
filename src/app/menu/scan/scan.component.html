@@ -1,10 +1,22 @@
 <ion-content>
-    <ion-header>
-        <ion-toolbar>
-          <ion-title>Menù</ion-title>
-          <ion-buttons slot="start">
-            <ion-menu-button autoHide="false"></ion-menu-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-  </ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title >
+         Barcode Scanner
+      </ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content padding>
+    <div *ngIf="results">
+      <p>{{results.text}}</p>
+      <p>{{results.format}}</p>
+      <p>{{results.cancelled}}</p>
+    </div>
+ 
+    <ion-button (click)="scanCode()" center>Scan Code</ion-button>
+    <p>{{scannedResult}}</p>
+ 
+</ion-content>
