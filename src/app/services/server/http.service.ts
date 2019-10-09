@@ -10,7 +10,7 @@ export class HttpService {
 
     private readonly api: string;
     
-    readonly hostname = '172.19.16.229';
+    readonly hostname = '192.168.1.48';
     readonly port = 8080;
     readonly context = 'MuseumApp';
 

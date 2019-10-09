@@ -6,8 +6,8 @@ import { SignupForm } from '../../interfaces/signup-form';
 import { LoginForm } from '../../interfaces/login-form';
 import { bookingForm } from '../../interfaces/booking-form';
 import { User } from '../../interfaces/user';
-import { map } from 'rxjs/operators';
 import { StorageService } from '../client/storage.service';
+import { Paintings } from '../../interfaces/paintings';
 
 @Injectable({
     providedIn: 'root'
@@ -45,6 +45,14 @@ export class UserService {
         });
     }
 
+    public getPainting(data): Observable<Paintings> { 
+        console.log(data)
+        return this.http.post('/paintings', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
     
     public logout(): void {
        
