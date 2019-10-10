@@ -46,9 +46,10 @@
             </ion-label>
           </ion-item>
           <ion-item [routerLink]="['/home/login']">
-            <ion-icon slot="start" name="log-out"></ion-icon>
             <ion-label>
+              <ion-button type = "submit"  (click) = "logoutButton()">
               Logout
+            </ion-button>
             </ion-label>
           </ion-item>
         </ion-menu-toggle>

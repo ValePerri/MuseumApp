@@ -43,6 +43,7 @@ export class LoginComponent {
             username: this.loginForm.value.username,
             password: this.loginForm.value.password});
           this.router.navigateByUrl('');
+          this.loginForm.reset();
         } else {
           this.notificationService.showError(res['error']);
         }

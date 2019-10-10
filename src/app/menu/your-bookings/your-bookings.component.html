@@ -21,11 +21,49 @@
         </div>
       </ion-card-header>
 
-      <ion-item>
-        {{elem1}},
-        {{elem2}},
-        {{elem3}}
-      </ion-item>
+
+
+
+
+
+      <ion-list inset>
+        <ion-item>
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                Name
+              </ion-col>
+              <ion-col>
+                Date
+              </ion-col>
+              <ion-col>
+                Time
+              </ion-col>
+              <ion-col>
+                number People
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+        <ion-item *ngFor="let item of lista">
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                {{name}}
+              </ion-col>
+              <ion-col>
+                {{item.date}}
+              </ion-col>
+              <ion-col>
+                {{item.time}}
+              </ion-col>
+              <ion-col>
+                {{item.numberp}}
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-item>
+      </ion-list>
     </ion-card>
   </ion-grid>
 

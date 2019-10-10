@@ -1,0 +1,15 @@
+ion-content{
+    ion-item:first-child{
+        ion-col{
+            color: rgb(77, 110, 218);
+            font-weight: bold;
+            font-size: 18px;
+
+        }
+    }
+    
+    ion-col{
+        text-align: center;
+    }
+    
+}

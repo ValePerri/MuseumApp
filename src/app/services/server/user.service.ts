@@ -75,9 +75,6 @@ export class UserService {
 
 
     
-    public logout(): void {
-       
-    }
   }
 
     
