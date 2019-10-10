@@ -1,0 +1,34 @@
+<ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menù</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-card>
+      <img src="../../../assets/yourbookings.jpg" />
+      <ion-card-header>
+        <ion-icon name="logo-angular" slot="start"></ion-icon>
+        <ion-card-subtitle>Museum Application </ion-card-subtitle>
+        <div text-center>
+          <ion-card-title>
+            <h3>These are your bookings</h3>
+          </ion-card-title>
+        </div>
+      </ion-card-header>
+
+      <ion-item>
+        {{elem1}},
+        {{elem2}},
+        {{elem3}}
+      </ion-item>
+    </ion-card>
+  </ion-grid>
+
+
+
+</ion-content>

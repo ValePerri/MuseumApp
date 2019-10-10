@@ -7,8 +7,9 @@ import { MenuPage } from './menu.page';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ScanComponent } from './scan/scan.component';
 import { AdviceComponent } from './advice/advice.component';
-import { BookingComponent } from './booking/booking.component'
+import { BookingComponent } from './booking/booking.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { YourBookingsComponent } from './your-bookings/your-bookings.component';
 
 @NgModule({
   imports: [
@@ -39,11 +40,15 @@ import { ReactiveFormsModule } from '@angular/forms';
             {
                 path: 'booking',
                 component: BookingComponent
+            },            
+            {
+                path: 'yourbookings',
+                component: YourBookingsComponent
             }
         ]
     }
     ])
   ],
-  declarations: [MenuPage, AboutusComponent, ScanComponent, AdviceComponent, BookingComponent]
+  declarations: [MenuPage, AboutusComponent, ScanComponent, AdviceComponent, BookingComponent, YourBookingsComponent]
 })
 export class MenuPageModule {}

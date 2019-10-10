@@ -8,6 +8,7 @@ import { bookingForm } from '../../interfaces/booking-form';
 import { User } from '../../interfaces/user';
 import { StorageService } from '../client/storage.service';
 import { Paintings } from '../../interfaces/paintings';
+import { feedbackForm } from '../../interfaces/feedback-form';
 
 @Injectable({
     providedIn: 'root'
@@ -53,6 +54,26 @@ export class UserService {
             })
         });
     }
+
+    public feedback(data: feedbackForm): Observable<User> { 
+        console.log(data)
+        return this.http.post('/rate', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+    public getbookings(data): Observable<User> { 
+        console.log(data)
+        return this.http.post('/getbookings', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
+
+
     
     public logout(): void {
        

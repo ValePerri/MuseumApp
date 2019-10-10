@@ -8,9 +8,10 @@
     </ion-toolbar>
   </ion-header>
 
+  <!--
   <ion-grid>
     <ion-card>
-      <img src="../../../assets/qrscanner.png" />
+      <img src="../../../assets/qrscanner.png">
       <ion-card-header>
         <ion-icon name="logo-angular" slot="start"></ion-icon>
         <ion-card-subtitle>Museum Application </ion-card-subtitle>
@@ -22,36 +23,55 @@
       </ion-card-header>
     </ion-card>
   </ion-grid>
+  -->
 
-  <div text-center>    
-    <ion-button (click)="scanCode()"> Scan Code</ion-button>
-    
+  <div text-center>
+    <ion-button (click)="scanCode()"> Scan QR-Code </ion-button>
+
+    <h3 center>You are watching...</h3>
+
     <ion-card>
-        <img src='../../../assets/LaStrageDegliInnocenti.jpg'>
-        <ion-card-title>You are watching ...</ion-card-title>
-
-        <ion-list>
-            <ion-item>
-              <ion-label>Author: </ion-label> {{author}}
-            </ion-item>
-            <ion-item>
-              <ion-label>Title: </ion-label> {{title}}
-            </ion-item>
-            <ion-item>
-                <ion-label>Year: </ion-label> {{year}}
-              </ion-item>
-            <ion-item>
-              <ion-label>Descriprion: </ion-label> {{descriprion}}
-            </ion-item>
-        </ion-list>
+      <img src="../../../assets/Paintings/{{image}}">
+      <ion-list>
+        <ion-item>
+          <ion-label><b>Title:</b> </ion-label> {{title}}
+        </ion-item>
+        <ion-item>
+          <ion-label><b>Author:</b> </ion-label> {{author}}
+        </ion-item>
+        <ion-item>
+          <ion-label><b>Year: </b> </ion-label> {{year}}
+        </ion-item>
+        <ion-item>
+          <ion-label><b>Style: </b> </ion-label> {{style}}
+        </ion-item>
+        <ion-item>
+          <ion-label><b>Description: </b></ion-label>
+          <p>{{description}}</p>
+        </ion-item>
+      </ion-list>
     </ion-card>
   </div>
 
-  <!--<div text-center>
-    <ion-button (click)="getinfo()"> Result</ion-button>
-   <p>Author: {{author}}</p>
-    <p>{{title}}</p>
-  </div>-->
+  <form [formGroup]="feedbackForm" class="formGroup" (submit)="onFeed()">
+    <ion-item padding>
+      <ion-label position="absolute"><b>Your impression</b></ion-label>
+        <ion-range formControlName = "rate" min="0" max="5" pin="true" step="1" value="0" snaps="true">      
+      <ion-icon size="small" slot="start" name="ios-star" class="negative"></ion-icon>
+      <ion-icon size="big" slot="end" name="ios-star" class="positive"></ion-icon>
+    
+      </ion-range>
+    </ion-item>
+
+    <div text-center>
+      <ion-button class="formGroup" type="submit">
+        Your Feed
+      </ion-button>
+    </div>
+  </form>
+
+
+
 
 
 </ion-content>
