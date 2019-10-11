@@ -1,7 +1,7 @@
 <ion-app>
   <ion-menu side="start" menuId="custom" class="my-custom-menu">
     <ion-header>
-      <ion-toolbar color="primary">
+      <ion-toolbar color="success">
         <ion-title>Menu</ion-title>
       </ion-toolbar>
     </ion-header>
@@ -47,7 +47,7 @@
           </ion-item>
           <ion-item [routerLink]="['/home/login']">
             <ion-label>
-              <ion-button type = "submit"  (click) = "logoutButton()">
+              <ion-button color = "success" type = "submit"  (click) = "logoutButton()">
               Logout
             </ion-button>
             </ion-label>

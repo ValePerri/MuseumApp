@@ -1,14 +1,17 @@
 <ion-content>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Menù</ion-title>
-        <ion-buttons slot="start">
-          <ion-menu-button autoHide="false"></ion-menu-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
+  <ion-header>
+    <ion-toolbar color= "success">
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
+      <ion-title>Menù</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   
-    <ion-grid>
+  
         <ion-card>
           <img src="../../../assets/booking.jpg" />
           <ion-card-header>
@@ -19,9 +22,9 @@
                 <h3>Plan your visit</h3>
               </ion-card-title>
             </div>
-          </ion-card-header>
-        </ion-card>
-      </ion-grid>
+          </ion-card-header> 
+          <ion-card-content>
+      
   
   
     <form [formGroup]="bookingForm"  class="formGroup" (submit)="onBook()">
@@ -58,11 +61,14 @@
               <ion-select-option value="dieci">10</ion-select-option>
             </ion-input>
           </ion-item>
-      </div>    
+      </div>  
   
       <div text-center>
-        <ion-button  class="formGroup" type="submit"> Book your visit </ion-button>
+        <ion-button color = "success" class="formGroup" type="submit"> Book your visit </ion-button>
       </div>
     </form>
+  </ion-card-content>         
+</ion-card> 
+
   
   </ion-content>

@@ -1,6 +1,9 @@
 <ion-content>
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color= "success">
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
       <ion-title>Menù</ion-title>
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
@@ -16,23 +19,16 @@
         <ion-card-subtitle>Museum Application </ion-card-subtitle>
         <div text-center>
           <ion-card-title>
-            <h3>These are your bookings</h3>
+            <h3>These are your bookings: <b>{{name}}</b></h3>
           </ion-card-title>
         </div>
       </ion-card-header>
 
-
-
-
-
-
+      <ion-card-content>
       <ion-list inset>
         <ion-item>
           <ion-grid>
             <ion-row>
-              <ion-col>
-                Name
-              </ion-col>
               <ion-col>
                 Date
               </ion-col>
@@ -40,7 +36,7 @@
                 Time
               </ion-col>
               <ion-col>
-                number People
+                num. Visitors
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -48,9 +44,6 @@
         <ion-item *ngFor="let item of lista">
           <ion-grid>
             <ion-row>
-              <ion-col>
-                {{name}}
-              </ion-col>
               <ion-col>
                 {{item.date}}
               </ion-col>
@@ -64,6 +57,7 @@
           </ion-grid>
         </ion-item>
       </ion-list>
+    </ion-card-content>
     </ion-card>
   </ion-grid>
 

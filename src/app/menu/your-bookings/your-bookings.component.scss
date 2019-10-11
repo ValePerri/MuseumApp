@@ -7,9 +7,17 @@ ion-content{
 
         }
     }
-    
+    ion-list{
+            background: transparent;
+            background-color: transparent;
+    }
+
     ion-col{
         text-align: center;
+    }
+
+    ion-card{
+        background-color: #ffffff;
     }
     
 }

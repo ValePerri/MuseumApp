@@ -3,6 +3,7 @@ import { UserService } from '../../services/server/user.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/client/notification.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +18,10 @@ export class SignupComponent {
     public router: Router,
     public formBuilder: FormBuilder,
     public userService: UserService,
-    public notificationService: NotificationService) {
+    public notificationService: NotificationService,
+    private menu: MenuController) {
+
+    this.menu.enable(false, "custom");
 
     this.signupForm = this.formBuilder.group({
       username: new FormControl('', [
@@ -39,18 +43,18 @@ export class SignupComponent {
   }
 
   public onSignup(): void {
-    
+
     if (this.signupForm.valid) {
       //console.log(true);
       this.userService.signup({
         username: this.signupForm.value.username,
-        password: this.signupForm.value.password,     
+        password: this.signupForm.value.password,
         email: this.signupForm.value.email
       }).subscribe(
         res => {
-          if(res['error']){        
+          if (res['error']) {
             this.notificationService.showError(res['error']);
-          }else{
+          } else {
             this.notificationService.showSuccess('Registrazione effettuata con successo.');
             this.router.navigateByUrl('home/login');
           }
@@ -59,6 +63,6 @@ export class SignupComponent {
     }
   }
 
-  
+
 
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-menu',
@@ -7,6 +8,11 @@ import { Component } from '@angular/core';
 })
 export class MenuPage {
 
-  constructor() {}
+  constructor(private menu: MenuController) {
+
+    this.menu.enable(true, "custom"); 
+  }
+
+
 
 }

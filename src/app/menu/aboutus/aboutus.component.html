@@ -1,7 +1,9 @@
 <ion-content>
-
   <ion-header>
-    <ion-toolbar>
+    <ion-toolbar color="success">
+      <ion-buttons slot="end">
+        <ion-back-button defaultHref="home"></ion-back-button>
+      </ion-buttons>
       <ion-title>Menù</ion-title>
       <ion-buttons slot="start">
         <ion-menu-button autoHide="false"></ion-menu-button>
@@ -9,9 +11,6 @@
     </ion-toolbar>
   </ion-header>
 
-
-
-  <ion-grid>
     <ion-card>
       <img src="../../../assets/image2.jpg" />
       <ion-card-header>
@@ -23,34 +22,38 @@
           </ion-card-title>
         </div>
       </ion-card-header>
-    </ion-card>
-  </ion-grid>
+      
+  <ion-card-content>
 
-  <ion-card>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../../assets/team8/valeria.jpg">
-      </ion-avatar>
-      <ion-label>Valeria Perrini</ion-label>
-    </ion-item>
-  </ion-card>
 
-  <ion-card>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../../assets/team8/Ida.jpg">
-      </ion-avatar>
-      <ion-label>Ida De Stefano</ion-label>
-    </ion-item>
-  </ion-card>
+      <ion-card>
+        <ion-item color="success">
+          <ion-avatar slot="start">
+            <img src="../../../assets/team8/valeria.jpg">
+          </ion-avatar>
+          <ion-label>Valeria Perrini</ion-label>
+        </ion-item>
+      </ion-card>
 
-  <ion-card>
-    <ion-item>
-      <ion-avatar slot="start">
-        <img src="../../../assets/team8/Ilaria.jpg">
-      </ion-avatar>
-      <ion-label>Ilaria Bottiglieri</ion-label>
-    </ion-item>
+      <ion-card>
+        <ion-item color="success">
+          <ion-avatar slot="start">
+            <img src="../../../assets/team8/Ida.jpg">
+          </ion-avatar>
+          <ion-label>Ida De Stefano</ion-label>
+        </ion-item>
+      </ion-card>
+
+      <ion-card >
+        <ion-item color="success">
+          <ion-avatar slot="start">
+            <img src="../../../assets/team8/Ilaria.jpg">
+          </ion-avatar>
+          <ion-label>Ilaria Bottiglieri</ion-label>
+        </ion-item>
+      </ion-card>
+
+  </ion-card-content>
   </ion-card>
 
 </ion-content>

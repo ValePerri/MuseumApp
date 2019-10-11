@@ -1,6 +1,8 @@
 ion-content{
     --background: transparent;
-    background: url('../../assets/back12.jpg');
+    
+    background-color: #FFFBCB;
+    //background: url('../../assets/back12.png');
     background-size: cover;
     
     h1 {
@@ -13,4 +15,5 @@ ion-content{
         font-weight: 700;
         text-transform: uppercase;
     }
+    
 }

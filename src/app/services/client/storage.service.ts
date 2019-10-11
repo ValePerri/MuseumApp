@@ -23,12 +23,7 @@ export class StorageService {
         this.storage.remove('user');
     }
 
-    public logout():void{
-        if(this.getUser){
-            console.log('Logout');
-            this.removeUser();
-        }
-    }
+ 
     
 
     

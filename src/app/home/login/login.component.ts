@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { NotificationService } from '../../services/client/notification.service';
 import { StorageService } from '../../services/client/storage.service'
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,12 @@ export class LoginComponent {
 
   loginForm: FormGroup;
 
-  constructor(private storage: StorageService, private router: Router, private formBuilder: FormBuilder, private userService: UserService, private notificationService: NotificationService) {
+  constructor(private storage: StorageService,
+    private router: Router, private formBuilder: FormBuilder,
+    private userService: UserService, private notificationService: NotificationService,
+    private menu: MenuController) {
+
+    this.menu.enable(false, "custom");
     this.loginForm = this.formBuilder.group({
       username: new FormControl('', [
         Validators.minLength(4),
@@ -41,8 +47,9 @@ export class LoginComponent {
           this.notificationService.showSuccess('Login effettuato!');
           this.storage.setUser({
             username: this.loginForm.value.username,
-            password: this.loginForm.value.password});
-          this.router.navigateByUrl('');
+            password: this.loginForm.value.password
+          });
+          this.router.navigateByUrl('/menu');
           this.loginForm.reset();
         } else {
           this.notificationService.showError(res['error']);
@@ -50,6 +57,7 @@ export class LoginComponent {
       }
     )
   }
+  
 
   public logged(): Promise<boolean> {
     return this.storage.getUser().then(

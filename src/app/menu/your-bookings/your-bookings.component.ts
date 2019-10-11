@@ -2,22 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/server/user.service';
 import { StorageService } from '../../services/client/storage.service';
 import { NotificationService } from '../../services/client/notification.service';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-your-bookings',
   templateUrl: './your-bookings.component.html',
   styleUrls: ['../menu.page.scss', './your-bookings.component.scss'],
 })
-export class YourBookingsComponent {
+export class YourBookingsComponent implements OnInit{
 
   lista: any
   name: any
 
-
   constructor(private storage: StorageService, private userService: UserService, private notificationService: NotificationService) {
     this.getbookings();
   }
+  ngOnInit() {
+    this.getbookings();
+  }
+
 
   private getbookings() {
 
