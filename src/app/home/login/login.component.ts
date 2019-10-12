@@ -21,6 +21,7 @@ export class LoginComponent {
     private menu: MenuController) {
 
     this.menu.enable(false, "custom");
+    
     this.loginForm = this.formBuilder.group({
       username: new FormControl('', [
         Validators.minLength(4),

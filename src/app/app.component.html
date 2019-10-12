@@ -18,25 +18,7 @@
           <ion-item [routerLink]="['/menu/booking']">
             <ion-icon slot="start" name="clipboard"></ion-icon>
             <ion-label>
-              Booking
-            </ion-label>
-          </ion-item>
-          <ion-item [routerLink]="['/menu/scan']">
-            <ion-icon slot="start" name="qr-scanner"></ion-icon>
-            <ion-label>
-              Scan
-            </ion-label>
-          </ion-item>
-          <ion-item [routerLink]="['/menu/advice']">
-            <ion-icon slot="start" name="help-circle-outline"></ion-icon>
-            <ion-label>
-              Advice
-            </ion-label>
-          </ion-item>
-          <ion-item [routerLink]="['/menu/aboutus']">
-            <ion-icon slot="start" name="contacts"></ion-icon>
-            <ion-label>
-              About us
+              Add Bookings
             </ion-label>
           </ion-item>
           <ion-item [routerLink]="['/menu/yourbookings']">
@@ -45,6 +27,24 @@
               Your Bookings
             </ion-label>
           </ion-item>
+          <ion-item [routerLink]="['/menu/scan']">
+            <ion-icon slot="start" name="qr-scanner"></ion-icon>
+            <ion-label>
+              Scan QR-Code
+            </ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/menu/advice']">
+            <ion-icon slot="start" name="help-circle-outline"></ion-icon>
+            <ion-label>
+              Receive our advice
+            </ion-label>
+          </ion-item>
+          <ion-item [routerLink]="['/menu/aboutus']">
+            <ion-icon slot="start" name="contacts"></ion-icon>
+            <ion-label>
+              About us
+            </ion-label>
+          </ion-item>          
           <ion-item [routerLink]="['/home/login']">
             <ion-label>
               <ion-button color = "success" type = "submit"  (click) = "logoutButton()">

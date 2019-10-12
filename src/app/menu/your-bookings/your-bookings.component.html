@@ -1,6 +1,6 @@
 <ion-content>
   <ion-header>
-    <ion-toolbar color= "success">
+    <ion-toolbar color="success">
       <ion-buttons slot="end">
         <ion-back-button defaultHref="home"></ion-back-button>
       </ion-buttons>
@@ -25,39 +25,47 @@
       </ion-card-header>
 
       <ion-card-content>
-      <ion-list inset>
-        <ion-item>
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                Date
-              </ion-col>
-              <ion-col>
-                Time
-              </ion-col>
-              <ion-col>
-                num. Visitors
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-        <ion-item *ngFor="let item of lista">
-          <ion-grid>
-            <ion-row>
-              <ion-col>
-                {{item.date}}
-              </ion-col>
-              <ion-col>
-                {{item.time}}
-              </ion-col>
-              <ion-col>
-                {{item.numberp}}
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
+        <ion-list inset>
+          <ion-item>
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  Date
+                </ion-col>
+                <ion-col>
+                  Time
+                </ion-col>
+                <ion-col>
+                  num. Visitors
+                </ion-col>
+                <ion-col>
+                  Delete
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+          <ion-item *ngFor="let item of lista">
+            <ion-grid>
+              <ion-row>
+                <ion-col>
+                  {{item.date}}
+                </ion-col>
+                <ion-col>
+                  {{item.time}}
+                </ion-col>
+                <ion-col>
+                  {{item.numberp}}
+                </ion-col>
+                <ion-col>
+                    <button (click)="refreshPage(item.date,item.time,item.numberp)">
+                        <ion-icon name="close"></ion-icon>
+                      </button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
     </ion-card>
   </ion-grid>
 

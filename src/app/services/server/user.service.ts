@@ -9,7 +9,7 @@ import { User } from '../../interfaces/user';
 import { StorageService } from '../client/storage.service';
 import { Paintings } from '../../interfaces/paintings';
 import { feedbackForm } from '../../interfaces/feedback-form';
-
+import { museums } from 'src/app/interfaces/museums';
 @Injectable({
     providedIn: 'root'
 })
@@ -73,8 +73,23 @@ export class UserService {
         });
     }
 
+    public removebookings(data): Observable<bookingForm> { 
+        //console.log(data)
+        return this.http.post('/booking/removebooking', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }
 
-    
+    public getadvice(data):  Observable<museums>{ 
+        console.log(data)
+        return this.http.post('/advice', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }   
   }
 
     

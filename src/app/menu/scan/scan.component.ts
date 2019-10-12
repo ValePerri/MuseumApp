@@ -85,7 +85,7 @@ export class ScanComponent {
 
     this.storage.getUser().then(user => {
       this.userService.feedback({
-        userN:user.username,
+        userN: user.username,
         qrid: this.splitted[0],
         rate: this.feedbackForm.value.rate 
      }).subscribe(            

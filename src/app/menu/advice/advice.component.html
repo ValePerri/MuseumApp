@@ -1,6 +1,6 @@
 <ion-content>
   <ion-header>
-    <ion-toolbar color= "success">
+    <ion-toolbar color="success">
       <ion-buttons slot="end">
         <ion-back-button defaultHref="home"></ion-back-button>
       </ion-buttons>
@@ -11,23 +11,32 @@
     </ion-toolbar>
   </ion-header>
 
-      <ion-grid>
-          <ion-card>
-            <img src="../../../assets/advice4.jpg" />
-            <ion-card-header>
-              <ion-icon name="logo-angular" slot="start"></ion-icon>
-              <ion-card-subtitle>Museum Application </ion-card-subtitle>
-              <div text-center>
-                <ion-card-title>
-                  <h3>This is our advice</h3>
-                </ion-card-title>
-              </div>
-            </ion-card-header>
-          </ion-card>
-        </ion-grid>
+  <ion-grid>
+    <ion-card>
+      <img src="../../../assets/advice4.jpg" />
+      <ion-card-header>
+        <ion-icon name="logo-angular" slot="start"></ion-icon>
+        <ion-card-subtitle>Museum Application </ion-card-subtitle>
+        <div text-center>
+          <ion-card-title>
+            <h3>This is our advice for you: <b>{{name}}</b> </h3>
+          </ion-card-title>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-list inset>
+          <ion-item *ngFor="let item of lista">
+            <ion-grid>
+              <ion-row>
+                {{item.name}}
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ion-grid>
 
 
-
-
-  </ion-content>
-
+</ion-content>

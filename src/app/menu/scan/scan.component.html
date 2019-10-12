@@ -42,17 +42,16 @@
 
         <form [formGroup]="feedbackForm" class="formGroup" (submit)="onFeed()">
           <ion-item padding>
-            <ion-label position="absolute"><b>Your impression</b></ion-label>
+            <ion-label position="floating"><b>Your impression</b></ion-label>
             <ion-range formControlName="rate" min="0" max="5" pin="true" step="1" value="0" snaps="true">
               <ion-icon size="small" slot="start" name="ios-star" class="negative"></ion-icon>
               <ion-icon size="big" slot="end" name="ios-star" class="positive"></ion-icon>
-
             </ion-range>
           </ion-item>
 
           <div text-center>
             <ion-button color="success" class="formGroup" type="submit">
-              Submit your feedback
+              your feedback
             </ion-button>
           </div>
         </form>
