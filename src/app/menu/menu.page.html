@@ -1,14 +1,54 @@
-
-<ion-content>
+<ion-content center text-center>
   <ion-header>
-      <ion-toolbar color ="success">
-        <ion-title>Menù</ion-title>
-        <ion-buttons slot="start">
-          <ion-menu-button autoHide="false"></ion-menu-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Menu</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+  <h3>Welcome <b>{{name}}</b>!</h3>
+  <img src="../../assets/backpiccolo.png">
+  
+
+  <ion-grid>
+      <ion-row>
+        <ion-col>          
+          <img src="../../assets/book.png">
+        </ion-col>
+        <ion-col>
+          Plan your visit to our museum by home, avoiding queues at the ticket office.
+        </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col>
+        Scans the QR CODE next the paintings to get more informations about it.
+      </ion-col>
+      <ion-col>
+        <img src="../../assets/qr.png">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <img src="../../assets/rating.png">
+      </ion-col>
+      <ion-col>
+        Rate the painting based on your liking.
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        You will receive our advice on the next museums to visit based on the preferences expressed by you.
+      </ion-col>
+      <ion-col>
+        <img src="../../assets/advice_icon.png">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+
+
+
 </ion-content>
-
-
-

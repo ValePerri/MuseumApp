@@ -28,6 +28,7 @@ export class ScanComponent {
   feedbackForm: FormGroup;
   user: User;
   qrcode: string
+  
 
 
   constructor(private storage: StorageService,
@@ -44,9 +45,6 @@ export class ScanComponent {
       rate: new FormControl('', [
       ]),
     });
-
-
-
   }
 
   private scanCode() {

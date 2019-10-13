@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { StorageService } from '../services/client/storage.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,11 +9,19 @@ import { MenuController } from '@ionic/angular';
 })
 export class MenuPage {
 
-  constructor(private menu: MenuController) {
+  name: any
 
-    this.menu.enable(true, "custom"); 
+  constructor(private menu: MenuController, private storage: StorageService) {
+
+    this.menu.enable(true, "custom");
+    this.oninit();
+    
   }
 
-
+  oninit(){
+    this.storage.getUser().then(user => {
+      this.name = user.username    
+    })
+  }
 
 }

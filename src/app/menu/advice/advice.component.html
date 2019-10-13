@@ -1,6 +1,7 @@
-<ion-content>
+<ion-content center text-center>
+
   <ion-header>
-    <ion-toolbar color="success">
+    <ion-toolbar color="primary">
       <ion-buttons slot="end">
         <ion-back-button defaultHref="home"></ion-back-button>
       </ion-buttons>
@@ -19,12 +20,12 @@
         <ion-card-subtitle>Museum Application </ion-card-subtitle>
         <div text-center>
           <ion-card-title>
-            <h3>This is our advice for you: <b>{{name}}</b> </h3>
+            <h3><b>{{name}}</b> We noticed that you like '{{style}}' style .. you might also like</h3>
           </ion-card-title>
         </div>
       </ion-card-header>
 
-      <ion-card-content>
+      <ion-card-content>          
         <ion-list inset>
           <ion-item *ngFor="let item of lista">
             <ion-grid>
@@ -36,7 +37,9 @@
         </ion-list>
       </ion-card-content>
     </ion-card>
+    <img src="../../../assets/happy.svg" >
   </ion-grid>
+  
 
 
 </ion-content>

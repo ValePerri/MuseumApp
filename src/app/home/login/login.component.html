@@ -1,11 +1,16 @@
-<ion-content>
+<ion-content center text-center>
   <div text-center>
-    <ion-toolbar color="success">
+    <ion-toolbar color="primary">
       <ion-title>
         Login
       </ion-title>
     </ion-toolbar>
   </div>
+
+  <div >
+    <img src="../../assets/backpiccolo.png" class="logo" />
+  </div>
+
   <form [formGroup]="loginForm" class="login-container" (submit)="onLogin()">
     <ion-grid>
       <ion-row color="primary" justify-content-center>
@@ -20,14 +25,14 @@
               </ion-input>
             </ion-item>
             <ion-item lines="none" tabindex="2">
-              <ion-checkbox color = "success" slot="end" #showPassword></ion-checkbox>
+              <ion-checkbox color = "primary" slot="end" #showPassword></ion-checkbox>
               <ion-input #password formControlName="password" required="true"
                 [type]="showPassword.checked ? 'text' : 'password'" type="password" (keyup.enter)="onLogin()"
                 placeholder="Password"></ion-input>
             </ion-item>
           </div>
           <div padding>
-            <ion-button color="success" size="large" type="submit" expand="block">Login</ion-button>
+            <ion-button color="primary" size="large" type="submit" expand="block">Login</ion-button>
           </div>
           <ion-row>
             <div text-center>

@@ -13,11 +13,12 @@ export class AdviceComponent implements OnInit {
   lista: any
   name: any
   errorname: any
+  style: any
 
   constructor(private storage: StorageService, private userService: UserService, private notificationService: NotificationService) { }
 
   ngOnInit() {
-    this.refreshPage();
+    this.getAdvice()
   }
 
   private getAdvice() {
@@ -34,15 +35,12 @@ export class AdviceComponent implements OnInit {
           }else{
           console.log(res);
           this.lista = res;
+          this.style =  res[0]['style'];
           this.notificationService.showSuccess("Success");
           }
         }
       )
     });
-  }
-
-  refreshPage() {
-    this.getAdvice();
   }
 
 }
