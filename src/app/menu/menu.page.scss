@@ -1,14 +1,19 @@
 ion-content {
-    
+
     --background: transparent;    
     background-color: #FFFBCB;
     background-size: cover;
 
-    
-    ion-button{
-        font-size: 26px;
-        border-radius: 60px;   
+    ion-item{
+        --background: transparent;
+        .row.col{
+            --background: transparent; 
+            background-color: #FFFBCB;    
+            font-size: 26px;
+            border-block: 60px; 
+        }
     }
+
 
     
     h1 {

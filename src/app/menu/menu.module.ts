@@ -19,7 +19,6 @@ import { YourBookingsComponent } from './your-bookings/your-bookings.component';
       RouterModule.forChild([
       {
         path: '',
-        //canActivate: [Logged],
         children: [
             {
                 path: '',

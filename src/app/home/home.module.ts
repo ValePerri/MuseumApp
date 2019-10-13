@@ -18,7 +18,7 @@ import { LoginComponent } from './login/login.component';
     IonicModule,
     RouterModule.forChild([
       {
-        path: '',
+        path: ' ',
         component: HomePage
       },
       {
@@ -26,7 +26,7 @@ import { LoginComponent } from './login/login.component';
         component: SignupComponent
       },
       {
-        path: 'login',
+        path: 'login', 
         component: LoginComponent
       },
       

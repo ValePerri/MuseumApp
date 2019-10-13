@@ -10,45 +10,57 @@
 
   <h3>Welcome <b>{{name}}</b>!</h3>
   <img src="../../assets/backpiccolo.png">
-  
+
 
   <ion-grid>
+
+    <ion-item>
       <ion-row>
-        <ion-col>          
+        <ion-col>
           <img src="../../assets/book.png">
         </ion-col>
         <ion-col>
           Plan your visit to our museum by home, avoiding queues at the ticket office.
+          <ion-button padding [routerLink]="['./booking']"> Add a booking</ion-button>
         </ion-col>
       </ion-row>
-    <ion-row>
-      <ion-col>
-        Scans the QR CODE next the paintings to get more informations about it.
-      </ion-col>
-      <ion-col>
-        <img src="../../assets/qr.png">
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <img src="../../assets/rating.png">
-      </ion-col>
-      <ion-col>
-        Rate the painting based on your liking.
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        You will receive our advice on the next museums to visit based on the preferences expressed by you.
-      </ion-col>
-      <ion-col>
-        <img src="../../assets/advice_icon.png">
-      </ion-col>
-    </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          Scans the QR CODE next the paintings to get more informations about it.
+          <ion-button padding [routerLink]="['./scan']"> Scan the QR-Code</ion-button>
+        </ion-col>
+        <ion-col>
+          <img src="../../assets/qr.png">
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          <img src="../../assets/rating.png">
+        </ion-col>
+        <ion-col>
+          Rate the painting based on your liking.
+          <ion-button padding [routerLink]="['./scan']"> Rate the paintings</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          You will receive our advice on the next museums to visit based on the preferences expressed by you.
+          <ion-button padding [routerLink]="['./advice']"> Get our advice</ion-button>
+        </ion-col>
+        <ion-col>
+          <img src="../../assets/advice_icon.png">
+        </ion-col>
+      </ion-row>
+    </ion-item>
   </ion-grid>
-
-
-
-
 
 </ion-content>
