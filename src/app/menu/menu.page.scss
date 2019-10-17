@@ -13,17 +13,22 @@ ion-content {
             border-block: 60px; 
         }
     }
-
-
+    ion-slide{
+        ion-card{
+            background-color: #ffffff;  
+              
+        }
+    }
     
     h1 {
-        margin: 60px 0;
-        font-size: 40px;
+        margin: 20px 0;
+        font-size: 20px;
     }
 
     h2 {
         font-size: 20px;
-        font-weight: 700;
-        text-transform: uppercase;
+    }
+    h3 {
+        font-size: 30px;
     }
 }

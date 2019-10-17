@@ -15,6 +15,7 @@ export class BookingComponent {
 
   bookingForm: FormGroup;
   user: User;
+  isenabled: boolean 
 
   constructor(private storage: StorageService, private router: Router, private formBuilder: FormBuilder, private userService: UserService, private notificationService: NotificationService) {
     this.bookingForm = this.formBuilder.group({
@@ -23,6 +24,24 @@ export class BookingComponent {
       numpeople: new FormControl(),
     });
   }
+
+  ionViewWillEnter(){
+    this.isAnonymous();
+  }
+
+
+  isAnonymous(){
+    this.storage.getUser().then(user => {
+      console.log(user.auth);
+      if(user.auth=="true"){
+        this.isenabled = true;
+      }else{
+        this.isenabled = false;
+      }
+    });
+  }
+  
+  
 
   private onBook(): void {
 
@@ -44,7 +63,5 @@ export class BookingComponent {
       )
 
     });
-
-
   }
 }

@@ -64,7 +64,7 @@
       </div>  
   
       <div text-center>
-        <ion-button color = "primary" class="formGroup" type="submit"> Book your visit </ion-button>
+        <ion-button [disabled] = "!isenabled" color = "primary" class="formGroup" type="submit"> Book your visit </ion-button>
       </div>
     </form>
   </ion-card-content>         

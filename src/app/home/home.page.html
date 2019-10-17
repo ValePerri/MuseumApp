@@ -1,27 +1,49 @@
-<ion-toolbar color="primary" center text-center>
-  <ion-title>
-    Welcome!
-  </ion-title>
-</ion-toolbar>
-<ion-content padding id="welcome" center text-center>
-
-  <div>
-    <img src="../../assets/back12.png" class="logo" />
+<ion-content center text-center>
+  <div text-center>
+    <ion-toolbar color="primary">
+      <ion-title>
+        Login
+      </ion-title>
+    </ion-toolbar>
   </div>
 
-  <ion-grid>    
-     
+  <div >
+    <img src="../../assets/backpiccolo.png" class="logo" />
+  </div>
+
+  <form [formGroup]="loginForm" class="login-container" (submit)="onLogin()">
+    <ion-grid>
       <ion-row color="primary" justify-content-center>
-          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-        <ion-button size="large" color="primary" href="./home/signup">Sign up</ion-button>
-      </ion-col>
-    </ion-row>   
-    <ion-row color="primary" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <ion-button size="large" color="primary" href="./home/login">Log in</ion-button>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+          <div text-center>
 
-
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-input #username formControlName="username" required minlength="4" type="username"
+                (keyup.enter)="onLogin()" placeholder="Username">
+              </ion-input>
+            </ion-item>
+            <ion-item lines="none" tabindex="2">
+              <ion-checkbox color = "primary" slot="end" #showPassword></ion-checkbox>
+              <ion-input #password formControlName="password" required="true"
+                [type]="showPassword.checked ? 'text' : 'password'" type="password" (keyup.enter)="onLogin()"
+                placeholder="Password"></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button color="primary" size="large" type="submit" expand="block">Login</ion-button>
+          </div>
+          <ion-row>
+            <div text-center>
+              If you don't have an account, please <a routerLink='signup'>register</a> first!
+            </div>
+          </ion-row>
+          <ion-row>
+            <p>If yout don't want to sign in click <ion-button color="primary" fill = "clear" type="submit" (click) = "anonimUser()" >Here</ion-button></p>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>

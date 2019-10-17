@@ -6,7 +6,6 @@ import { RouterModule } from '@angular/router';
 
 import { HomePage } from './home.page';
 import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
 
 
 
@@ -18,20 +17,16 @@ import { LoginComponent } from './login/login.component';
     IonicModule,
     RouterModule.forChild([
       {
-        path: ' ',
-        component: HomePage
+        path: '',
+        component: HomePage,
       },
       {
         path: 'signup',
         component: SignupComponent
       },
-      {
-        path: 'login', 
-        component: LoginComponent
-      },
       
     ])
   ],
-  declarations: [HomePage, SignupComponent, LoginComponent]
+  declarations: [HomePage, SignupComponent]
 })
 export class HomePageModule {}

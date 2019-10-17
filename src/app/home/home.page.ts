@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
+import { UserService } from '../services/server/user.service';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NotificationService } from '../services/client/notification.service';
+import { StorageService } from '../services/client/storage.service'
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +13,69 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
-  constructor() {
+  loginForm: FormGroup;
+
+  constructor(private storage: StorageService,
+    private router: Router, private formBuilder: FormBuilder,
+    private userService: UserService, private notificationService: NotificationService,
+    private menu: MenuController) {
+
+    this.menu.enable(false, "custom");
+    
+    this.loginForm = this.formBuilder.group({
+      username: new FormControl('', [
+        Validators.minLength(4),
+        Validators.maxLength(18),
+        Validators.pattern('^[a-zA-Z]+(([\' ][a-zA-Z])?[a-zA-Z]*)*$'),
+        Validators.required
+      ]),
+      password: new FormControl('', [
+        Validators.minLength(8),
+        Validators.pattern('^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).*$'),
+        Validators.required
+      ])
+    });
   }
-  exitApp() {
-    console.log("exit");
-    window.close();
+
+  public onLogin(): void {
+    //console.log(true);
+    this.userService.loginWithCredentials({
+      username: this.loginForm.value.username,
+      password: this.loginForm.value.password
+    }).subscribe(
+      res => {
+        if (res['exists']) {
+          this.notificationService.showSuccess('Login effettuato!');
+          this.storage.setUser({
+            username: this.loginForm.value.username,
+            password: this.loginForm.value.password,
+            auth: "true",
+          });
+          this.router.navigateByUrl('/menu');
+          this.loginForm.reset();
+        } else {
+          this.notificationService.showError(res['error']);
+        }
+      }
+    )
   }
+
+  public anonimUser(): void {
+    //console.log(true);
+      this.storage.setUser({
+        username: "Anonymous",
+        password: "randomPass9",
+        auth: "false",
+      });
+      this.router.navigateByUrl('/menu');
+    }
+  
+
+  
 
 
 }
+
+
+
+

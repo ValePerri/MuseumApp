@@ -9,7 +9,7 @@ import { Time } from '@angular/common';
   templateUrl: './your-bookings.component.html',
   styleUrls: ['../menu.page.scss', './your-bookings.component.scss'],
 })
-export class YourBookingsComponent implements OnInit{
+export class YourBookingsComponent{
 
   lista: any
   name: any
@@ -17,9 +17,12 @@ export class YourBookingsComponent implements OnInit{
   constructor(private storage: StorageService, private userService: UserService, private notificationService: NotificationService) {
     
   }
-  ngOnInit() {    
-    this.getbookings;
+
+  ionViewWillEnter(){
+    this.getbookings();
   }
+
+     
 
 
   private getbookings() {
@@ -35,7 +38,7 @@ export class YourBookingsComponent implements OnInit{
           } else {
             console.log(res);
             this.lista = res;
-            this.notificationService.showSuccess("Success");
+            //this.notificationService.showSuccess("Success");
           }
         }
       )
@@ -58,24 +61,16 @@ export class YourBookingsComponent implements OnInit{
           } else {
             console.log(res);
             this.lista = res;
-            this.notificationService.showSuccess("Success");
+            this.notificationService.showSuccess("Booking removed with success");
           }
         }
       )
     });
-    this.refreshPage1()
+    this.getbookings();
   } 
 
-    ionViewWillEnter(date: Date, time: Time, numberp: number){
-        this.removebooking(date,time,numberp);
-    }
+    
+  
 
-    refreshPage(date: Date, time: Time, numberp: number) {
-    this.ionViewWillEnter(date,time,numberp);
-    }
-
-    refreshPage1() {
-      this.getbookings();
-    }
 
 }

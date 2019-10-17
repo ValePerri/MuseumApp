@@ -11,6 +11,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ZBar } from '@ionic-native/zbar/ngx';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ imports: [
     StatusBar,
     SplashScreen,
     ZBar,
+    TextToSpeech,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
 ],
 bootstrap: [AppComponent]

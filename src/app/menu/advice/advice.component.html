@@ -25,21 +25,21 @@
         </div>
       </ion-card-header>
 
-      <ion-card-content>          
-        <ion-list inset>
-          <ion-item *ngFor="let item of lista">
-            <ion-grid>
-              <ion-row>
-                {{item.name}}
-              </ion-row>
-            </ion-grid>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
+
+
+      <ion-list inset>
+        <ion-item *ngFor="let item of lista" center>
+          <div padding>
+            <div text-center>
+              <h1>{{item.title}}</h1>
+            </div>
+            <img src={{item.image}} width="100" height="auto" />
+          </div>
+        </ion-item>
+      </ion-list>
+
     </ion-card>
-    <img src="../../../assets/happy.svg" >
   </ion-grid>
-  
 
 
 </ion-content>

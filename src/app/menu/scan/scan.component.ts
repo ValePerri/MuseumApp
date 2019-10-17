@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, IterableDiffers } from '@angular/core';
 import { ZBar } from '@ionic-native/zbar/ngx'
 import { Paintings } from '../../interfaces/paintings';
 import { UserService } from '../../services/server/user.service';
@@ -6,7 +6,9 @@ import { NotificationService } from '../../services/client/notification.service'
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/client/storage.service';
 import { User } from '../../interfaces/user';
-import { FormBuilder, FormGroup ,FormControl} from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
+
 
 
 
@@ -28,24 +30,46 @@ export class ScanComponent {
   feedbackForm: FormGroup;
   user: User;
   qrcode: string
-  
+  audioON: boolean
+  logged: boolean
+  isenabled: boolean 
+
 
 
   constructor(private storage: StorageService,
     private zbar: ZBar, private userService: UserService,
     private notificationService: NotificationService, private router: Router,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private tts: TextToSpeech) {
 
     this.zbarOptions = {
       flash: 'off',
       drawSight: false
     }
+    
+    
+  }
+
+  ionViewWillEnter(){
     this.image = "qrscanner.png";
     this.feedbackForm = this.formBuilder.group({
       rate: new FormControl('', [
       ]),
     });
+    this.isAnonymous();
   }
+
+  isAnonymous(){
+    this.storage.getUser().then(user => {
+      console.log(user.auth);
+      if(user.auth=="true"){
+        this.isenabled = true;
+      }else{
+        this.isenabled = false;
+      }
+    });
+  }
+
 
   private scanCode() {
 
@@ -85,9 +109,9 @@ export class ScanComponent {
       this.userService.feedback({
         userN: user.username,
         qrid: this.splitted[0],
-        rate: this.feedbackForm.value.rate 
-     }).subscribe(            
-        res => {  
+        rate: this.feedbackForm.value.rate
+      }).subscribe(
+        res => {
           if (res['success']) {
             this.notificationService.showSuccess(res['success']);
           } else {
@@ -96,10 +120,23 @@ export class ScanComponent {
         }
       )
     });
-
-    
-
   }
 
+  private onSpeech() {
+
+      if (this.audioON) {
+        this.tts.speak({ text: "", locale: 'it-IT' })
+          .then(() => console.log('Success'))
+          .catch((reason: any) => console.log(reason));
+        this.audioON = false;
+      } else {
+        this.audioON = true;
+        this.tts.speak({ text: this.description, locale: 'it-IT' })
+          .then(() => console.log('Success'))
+          .catch((reason: any) => console.log(reason));
+      }
+  }
 
 }
+
+

@@ -8,7 +8,7 @@ import { UserService } from '../../services/server/user.service';
   templateUrl: './advice.component.html',
   styleUrls: ['../menu.page.scss', './advice.component.scss'],
 })
-export class AdviceComponent implements OnInit {
+export class AdviceComponent {
 
   lista: any
   name: any
@@ -17,8 +17,8 @@ export class AdviceComponent implements OnInit {
 
   constructor(private storage: StorageService, private userService: UserService, private notificationService: NotificationService) { }
 
-  ngOnInit() {
-    this.getAdvice()
+  ionViewWillEnter(){
+    this.getAdvice();
   }
 
   private getAdvice() {

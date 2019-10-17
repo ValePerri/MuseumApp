@@ -34,6 +34,9 @@
             <ion-label><b>Style: </b> </ion-label> {{style}}
           </ion-item>
           <ion-item>
+              <button ion-button  slot = end (click)="onSpeech()">
+                  <ion-icon size = 'large' name="volume-high"></ion-icon>
+              </button>
             <ion-label><b>Description: </b></ion-label>
             <p>{{description}}</p>
           </ion-item>
@@ -50,7 +53,7 @@
           </ion-item>
 
           <div text-center>
-            <ion-button color="primary" class="formGroup" type="submit">
+            <ion-button [disabled] = "!isenabled" color="primary" class="formGroup" type="submit">
               your feedback
             </ion-button>
           </div>

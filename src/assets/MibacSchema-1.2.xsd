@@ -1,0 +1,1372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.beniculturali.it/MibacSchema" xmlns:tns="http://www.beniculturali.it/MibacSchema" elementFormDefault="qualified">
+
+	<annotation>
+		<appinfo>
+			<esempio numero="1">
+				<nome lingua="en">Museum of modern arts</nome>
+			</esempio>
+			<esempio numero="2">
+				<nome lingua="it">Museo d'arte moderna</nome>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="termine">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="lingua" type="language"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	
+	<annotation>
+		<appinfo>
+			<esempio numero="1">
+				<traduzioni>
+					<testo lingua="en">Museum of modern arts</testo>
+					<testo lingua="sp">Museo de Arte Moderno</testo>
+					<testo lingua="fr">Musée des Arts Modernes</testo>
+				</traduzioni>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="traduzione">
+			<sequence>
+				<element name="testo" type="tns:termine" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+	</complexType>
+	
+	<annotation>
+		<appinfo>
+			<esempio numero="1">
+				<denomianazione>
+					<nomestandard>Museo d'arte moderna</nomestandard>
+					<sinonimi/>
+					<traduzioni>
+						<testo lingua="en">Museum of modern arts</testo>
+						<testo lingua="sp">Museo de Arte Moderno</testo>
+						<testo lingua="fr">Musée des Arts Modernes</testo>
+					</traduzioni>
+				</denomianazione>
+			</esempio>
+		</appinfo>
+	</annotation>	
+	<complexType name="denominazione">
+			<sequence>
+				<element name="nomestandard" type="string" minOccurs="1" maxOccurs="1"/>
+				<element name="sinonimi" minOccurs="0" maxOccurs="1">
+					<complexType>
+						<sequence>
+							<element name="sinonimo" type="string" minOccurs="0" maxOccurs="unbounded"/>
+						</sequence>
+					</complexType>
+				</element>
+				<element name="traduzioni" type="tns:traduzione" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+	</complexType>
+	
+	<complexType name="testo">
+			<sequence>
+				<element name="testostandard" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="traduzioni" type="tns:traduzione" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+	</complexType>
+	
+	<annotation>
+		<documentation>
+			Riferimento ad un ente (PA o organizzazione privata) associato ad una entità con un ruolo specifico. Ad esempio (vedi esempio 1),
+			l'ente gestore 
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<entegestore>
+					<identificatori>
+						<codice codifica="numero" sorgente="dbunico">345674</codice>
+						<codice codifica="espi" sorgente="mibac-cert">AS-BA</codice>
+					</identificatori>
+					<denominazione>Archivio di Stato di Bari</denominazione>
+				</entegestore>
+			</esempio>
+			<esempio numero="2">
+				<entegestore>
+					<denominazione>Monte dei Paschi di Siena</denominazione>
+				</entegestore>
+			</esempio>
+			<esempio numero="3">
+				<ente>
+					<identificatori>
+						<codice codifica="numero" sorgente="reg-liguria">345674</codice>
+					</identificatori>
+					<denominazione>Comune di Imperia</denominazione>
+				</ente>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="riferimentoEnte">
+			<sequence>
+				<element name="identificatore" type="tns:codici" minOccurs="0" maxOccurs="1"/>
+				<element name="denominazione" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="tipologia" type="tns:tipoDiEnte" minOccurs="0" maxOccurs="1"/>
+				<element name="descrizione" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="info" type="tns:info" minOccurs="0" maxOccurs="1"/>
+				<element name="indirizzo" type="tns:localizzazione" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+			<attribute name="ruolo" type="tns:ruoloEnte" use="required"/>
+	</complexType>
+
+	<simpleType name="ruoloEnte">
+		<restriction base="token">
+			<enumeration value="Responsabile" />
+			<enumeration value="Gestore" />
+			<enumeration value="Compilatore" />
+		</restriction>
+	</simpleType>
+	
+	<complexType name="riferimentoLuogo">
+			<sequence>
+				<element name="identificatore" type="tns:codici" minOccurs="0" maxOccurs="1"/>
+				<element name="denominazione" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="tipologia" type="tns:tipoDiLuogo" minOccurs="0" maxOccurs="1"/>
+				<element name="descrizione" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="info" type="tns:info" minOccurs="0" maxOccurs="1"/>
+				<element name="indirizzo" type="tns:localizzazione" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+			<attribute name="ruolo" type="tns:ruoloLuogo" use="required"/>
+	</complexType>
+
+	<simpleType name="ruoloLuogo">
+		<restriction base="token">
+			<enumeration value="Sede" />
+			<enumeration value="Altro" />
+		</restriction>
+	</simpleType>
+	
+	<annotation>
+		<documentation>
+			Un "contenitore" è di fatto un luogo della cultura che contiene al suo interno un gruppo di istitutzioni. Il
+			luogo è di per sè interessante dal punto di vista culturale (castello, palazzo antico, etc.) ma può anche essere
+			un complesso culturale il cui interesse è legato esclusivamente alle istituzioni museali/aree archeologiche/monumenti
+			contenuti. Gli identificatori del complesso culturale (contenitore) sono principalemente gestiti dal DBUnico centrale
+			così come la relazione contenuto-contenitore. Se un luogo della cultura riferisce un contenitore allora deve essere 
+			definito (obbligatoriamente) il codice dello stesso (codice "dbunico" e/o codice unico nazionale). 
+			La "nota" ha lo scopo di descrivere, se necessario, le caratteristiche dello specifico contenitore fisico.
+		</documentation>
+	</annotation>
+	<complexType name="contenitore">
+			<sequence>
+				<element name="nota" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="identificatori" type="tns:codici" minOccurs="1" maxOccurs="1"/>
+				<element name="denominazione" type="string" minOccurs="1" maxOccurs="1"/>
+				<element name="ruolo" type="tns:ruoloContenitore" minOccurs="1" maxOccurs="1"/>
+			</sequence>
+	</complexType>
+	
+	<complexType name="contenitori">
+			<sequence>
+				<element name="contenitore" type="tns:contenitore" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+	</complexType>
+
+	<simpleType name="ruoloContenitore">
+		<restriction base="token">
+			<enumeration value="Sede principale" />
+			<enumeration value="Sede secondaria" />
+			<enumeration value="Sede temporanea" />
+			<enumeration value="Spazio espositivo esterno" />
+			<enumeration value="Dislocazione temporanea di materiali" />
+			<enumeration value="Magazzino" />
+			<enumeration value="Archivio" />
+			<enumeration value="Altro" />
+		</restriction>
+	</simpleType>
+
+	
+	<annotation>
+		<documentation>
+			La compenente "Workflow" fà parte delle meta-informazioni associate ad una entità e descrive lo stato del record
+			nel sistema informativo di origine. L'unica informazioni obligatoria è la "dataUltimaModifica" in quanto verrà utilizzata
+			dai sistemi destinatari dell'informazione per stabilire se la versione nel proprio database è aggiornata oppure no.
+			I restanti attributi sono sicuramente valorizzati dal sistema centrale MiBAC e hanno lo scopo di descrivere lo stato
+			corrente del record e le entità coinvolte nel processo redazionale.
+		</documentation>
+	</annotation>
+	<complexType name="workflow">
+			<sequence>
+				<element name="stato" type="tns:statoEntita" minOccurs="0" maxOccurs="1"/>
+				<element name="enteCompilatore" type="tns:riferimentoEnte" minOccurs="0" maxOccurs="1"/>
+				<element name="nomeRedattore" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="nomeCapoRedattore" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="dataValidazione" type="dateTime" minOccurs="0" maxOccurs="1"/>
+				<element name="dataUltimaModifica" type="dateTime" minOccurs="1" maxOccurs="1"/>
+			</sequence>
+	</complexType>
+
+	<simpleType name="statoEntita">
+		<restriction base="token">
+			<enumeration value="In stesura" />
+			<enumeration value="In revisione" />
+			<enumeration value="Validato" />
+			<enumeration value="Sospeso" />
+			<enumeration value="Rimosso" />
+		</restriction>
+	</simpleType>
+	
+
+	<annotation>
+		<documentation>
+			Una entità (luogo, evento, etc.) dispone di un insieme di codici (>= 1) assegnati in fase di creazione del file
+			XML e vale la regola che ogni codice è univoco nel contesto in cui è definito. Tali codici potranno corrispondere
+			ad altrettanti identificatori univoci in diversi sistemi informativi o a codifiche imposte da enti di certificazione
+			con lo scopo di rendere identificabile l'entità nell'ambito di processi amministrativi. Una entità dispone di 
+			almeno un codice con tipologia "id" a rappresentare il codice univoco dell'entità nel database che ha originato il file.
+		</documentation>
+	</annotation>
+	<complexType name="codici">
+			<sequence>
+				<element name="codice" type="tns:codice" minOccurs="1" maxOccurs="unbounded"/>
+			</sequence>
+	</complexType>
+	
+	<annotation>
+		<documentation>
+			Il "tipoDiCodifica" definisce il metodo di costruzione di un codice. La codifica di base è "numero" e rappresenta la chiave primaria
+			del record in uno specifico contesto applicativo. I tipo "alfabetico" e "alfanumerico" sono varianti dello stesso tipo.
+			Le altre possibili codifiche rappresentano identificatori standard assegnati all'entità nel suo ciclo di vita e significativi in contesti amministrativi
+			specifici.
+		</documentation>
+	</annotation>
+	<simpleType name="tipoDiCodifica">
+		<restriction base="token">
+			<enumeration value="numero" />
+			<enumeration value="alfabetico" />
+			<enumeration value="alfanumerico" />
+			<enumeration value="istat" />
+			<enumeration value="doi" />
+			<enumeration value="isil" />
+			<enumeration value="espi" />
+			<enumeration value="sistan" />
+		</restriction>
+	</simpleType>
+	
+	<annotation>
+		<documentation>
+			Un codice è rappresentato da una terna (codifica, sorgente, valore). In termini XML la codifica e la sorgente sono attributi 
+			mentre il valore è nel corpo del tag "codice". Se prendiamo ad esempio l'entità "luogo della cultura" i codici che possiamo
+			aspettarci sono, ad esempio (numero, dbunico, 345674) e (doi, mibac-cert, IT-MUS-RM-534897) intendendo il codice interno all'applicazione
+			centrale DBUnico e il "codice unico internazionale" assegnato dall'ente di certificazione MiBAC all'entità. In particolare il 
+			codice unico sarà identificato da una sorgente particolare (mibac-cert). Nel caso in cui un'applicazione acquisisca un record
+			da sistema centrale MiBAC e il record avesse come origine la Regione Liguria i codici presenti nel file XML sarebbero almeno tre:
+			il codice di origine, il codice unico e il codice acquisito nel DBUnico. Sarebbe auspicabile che l'interscambio dei record
+			avvenga non soltanto tra il centro e la periferia ma possa avvenire anche in modo trasversale tra elementi della periferia
+			viene incoraggiata la gestione dei codici di origine e la loro estensione con i codici acquisiti.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<identificatori>
+					<codice codifica="numero" sorgente="dbunico">345674</codice>
+					<codice codifica="doi" sorgente="mibac-cert">IT-MUS-RM-534897</codice>
+				</identificatori>
+			</esempio>
+			<esempio numero="2">
+				<identificatori>
+					<codice codifica="numero" sorgente="reg-liguria"></codice>
+					<codice codifica="numero" sorgente="dbunico">6786875</codice>
+					<codice codifica="doi" sorgente="mibac-cert">IT-MUS-GE-98678</codice>
+				</identificatori>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="codice">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="codifica" type="tns:tipoDiCodifica" use="required"/>
+				<attribute name="sorgente" type="string" use="required"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+	
+
+	<annotation>
+		<documentation>
+			Le informazioni sull'accessibilità di un edificio attualmente contengono soltanto una indicazione generale (i.e. accessibile
+			o non accessibile a portatori di handicap) e una eventuale nota esplicativa. Quest'area è destinata a evolvere per accogliere
+			informazioni molto più dettagliate.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<accessibilita tipo="si"/>
+			</esempio>
+			<esempio numero="2">
+				<accessibilita tipo="si - in parte">
+					<nota>
+						<testo>
+							La struttura è direttamente accessibile dall'esterno anche se alcune collezioni, poste al secondo piano
+							dell'edificio sono raggiungibili soltanto attraverso una rampa di scale.
+						</testo>
+						<traduzioni>
+							<testo lingua="en">
+								The first floor of the building can be easely reached from the street. Some of the collections, on the second
+								floor, can only be reached through stairs.
+							</testo>
+						</traduzioni>
+					</nota>
+				</accessibilita>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="infoAccessibilita">
+			<sequence>
+				<element name="nota" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+			<attribute name="tipo" type="tns:tipoDiAccessibilita"/>
+	</complexType>
+	
+	<simpleType name="tipoDiAccessibilita">
+		<restriction base="token">
+			<enumeration value="Si" />
+			<enumeration value="Si - in parte" />
+			<enumeration value="Si - prevista" />
+			<enumeration value="No" />
+		</restriction>
+	</simpleType>
+	
+	
+	<annotation>
+		<documentation>
+			La localizzazione di un'entità (luogo della cultura, istituto, evento) consiste nell'indicazione dell'indirizzo e, eventualmente,
+			delle coordinate geografiche. Il campo "indirizzo" contiene la via e il numero civico. La città può essere identificata in due
+			modi alternativi: il codice istat del comune oppure attraverso l'indicazione di citta-provincia-regione.
+			Le informazioni cartografiche sono opzionali (anche se auspicabili).
+			La denominazione di una localizzazione corrisponde al modo usuale di identificare l'indirizzo: Sede principale, Ingresso secondario, etc.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<localizzazione>
+					<indirizzo>Via dei Platani, 3/R</indirizzo>
+					<cap>57125</cap>
+					<comune>67543</comune>
+					<cartografia> ... </cartografia>
+				</localizzazione>
+			</esempio>
+			<esempio numero="2">
+				<localizzazione>
+					<indirizzo>Via dei Platani, 3/R</indirizzo>
+					<localita>Limoncino</localita>
+					<cap>57125</cap>
+					<citta>Livorno</citta>
+					<provincia>Livorno</provincia>
+					<regione>Toscana</regione>
+					<cartografia> ... </cartografia>
+				</localizzazione>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="localizzazione">
+			<sequence>
+				<element name="via-piazza" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="numero-civico" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="localita" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="cap" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="comune" type="tns:istat" minOccurs="1" maxOccurs="1"/>
+				<element name="provincia" type="tns:istat" minOccurs="0" maxOccurs="1"/>
+				<element name="regione" type="tns:istat" minOccurs="0" maxOccurs="1"/>
+				<element name="cartografia" type="tns:infoCartografiche" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+			<attribute name="denominazione" type="string"/>
+	</complexType>
+
+	<complexType name="istat">
+		<simpleContent>
+			<extension base="string">
+				<attribute name="istat" type="string"/>
+			</extension>
+		</simpleContent>
+	</complexType>
+
+	<annotation>
+		<documentation>
+			Le informazioni cartografiche di un luogo consistono essenzialmente nell'indicazione delle coordinate del luogo rispetto a un sistema di riferimento
+			e una sorgente cartografica. Un punto nello spazio è rappresentato da una terna la cui interpretazione dipende dal sistema di riferimento.
+			Un luogo può avere più di una coordinata in relazione a diversi sistemi di riferimento e diverse sorgenti cartografiche.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<cartografia>
+					<punto crs="WGS84" sorgente="google">
+						<latitudine>41.895742</latitudine>
+						<longitudine>12.481289</longitudine>
+					</punto>
+				</cartografia>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="infoCartografiche">
+			<sequence>
+				<element name="punto" type="tns:punto" minOccurs="1" maxOccurs="unbounded"/>
+			</sequence>
+	</complexType>
+	
+	<complexType name="punto">
+			<sequence>
+				<element name="latitudine" type="string" minOccurs="1" maxOccurs="1"/>
+				<element name="longitudine" type="string" minOccurs="1" maxOccurs="1"/>
+				<element name="altitudine" type="string" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+			<attribute name="crs" type="string"/>
+			<attribute name="sorgente" type="string"/>
+	</complexType>
+
+	<annotation>
+		<documentation>
+			Se presente in un record (luogo della cultura) indica la possibilità di un periodo di chiusura temporanea della struttura e
+			le ragioni della stessa. Il periodo di chiusura temporanea può essere espresso testualmente (quando l'indicazione è generica)
+			o formalizzata con la data di inizio e la data di fine del periodo.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<chiusuraTemporanea>
+					<periodo>Dal 3/12/2010 al 15/3/2011</periodo>
+					<motivazioni>
+						<motivo>Per ristrutturazione o restauro</motivo>
+						<motivo>Altro</motivo>
+					</motivazioni>
+				</chiusuraTemporanea>
+			</esempio>
+			<esempio numero="1">
+				<chiusuraTemporanea>
+					<datainizio>3/12/2010</datainizio>
+					<datafine>15/3/2011</datafine>
+					<motivazioni>
+						<motivo>Per ristrutturazione o restauro</motivo>
+					</motivazioni>
+				</chiusuraTemporanea>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="chiusuraTemporanea">
+			<sequence>
+				<element name="periodo" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="datainizio" type="date" minOccurs="0" maxOccurs="1"/>				
+				<element name="datafine" type="date" minOccurs="0" maxOccurs="1"/>
+				<element name="nota" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="motivo" type="tns:motivoNoAccesso" minOccurs="1" maxOccurs="1" />
+			</sequence>
+	</complexType>
+	
+	<annotation>
+		<documentation>
+			Il motivo della chiusura temporanea è specificato secondo lo standard ISTAT
+				1 Per inagibilità
+				2 Per ristrutturazione o restauro
+				3 Per allestimento o scavi
+				4 Per carenza di risorse economiche
+				5 Per carenza di personale
+				6 Per cessazione definitiva dell’attività
+				7 Perché non è destinato alla pubblica fruizione
+				8 Altro (specificare)
+				9 Inesistente
+		</documentation>
+	</annotation>
+	
+	<simpleType name="motivoNoAccesso">
+		<restriction base="token">
+			<enumeration value="Per inagibilità" />
+			<enumeration value="Per ristrutturazione o restauro" />
+			<enumeration value="Per allestimento o scavi" />
+			<enumeration value="Per carenza di risorse economiche" />
+			<enumeration value="Per carenza di personale" />
+			<enumeration value="Per cessazione definitiva dell’attività" />
+			<enumeration value="Perché non è destinato alla pubblica fruizione" />
+			<enumeration value="Altro" />
+			<enumeration value="Inesistente" />
+		</restriction>
+	</simpleType>
+	
+
+	<annotation>
+		<documentation>
+			Elenco dei servizi offerti da una struttura museale. Ogni servizio nell'elenco appartiene ad una lista predefinita.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<servizi>
+					<servizio>Caffetteria</servizio>
+					<servizio>Bookshop</servizio>
+					<servizio>Visite guidate</servizio>
+					<servizio>Mediateca</servizio>
+				</servizi>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="servizi">
+			<sequence>
+				<element name="servizio" type="tns:tipoDiservizio" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+	</complexType>
+
+
+	<annotation>
+		<documentation>
+			Dall'archivio ISTAT. Occorre una riflessione su come uniformare questa tipologia.
+				Archivio
+				Fototeca	-> =Mediateca
+				Laboratorio_restauro
+				Sala_per_didattica
+				Didascalie
+				Percorsi_segnalati
+				Audioguide
+				Postazioni_multimediali
+				Strutture_disabili
+				Sito_Web
+				PC_pubblico
+				Biglietteria
+				Prenotazione_biglietti
+				Pubblicazioni
+				Sussidi_audiovisivi
+				Materiale_informativo
+				Vendita_Pubblicazioni -> =Bookshop
+				Prestito
+				Ristorazione	-> +Caffetteria
+				Guardaroba
+				Servizi_infanzia
+				Attivita_didattiche
+				Assistenza_disabili
+				Visite_guidate
+				Servizio_Pulizie
+				Vigilanza
+				Altri_Servizi
+				Altri_Spec
+				Restauro
+				Acquisizione_nuovi beni
+				Ricerca
+				Mostre
+				Convegni
+		</documentation>
+	</annotation>
+
+	<simpleType name="tipoDiservizio">
+		<restriction base="token">
+			<enumeration value="Archivio" />
+			<enumeration value="Fototeca" />
+			<enumeration value="Laboratorio di restauro" />
+			<enumeration value="Sala per la didattica" />
+			<enumeration value="Didascalie" />
+			<enumeration value="Percorsi segnalati" />
+			<enumeration value="Audioguide" />
+			<enumeration value="Postazioni multimediali" />
+			<enumeration value="Assistenza disabili" />
+			<enumeration value="Ristorazione" />
+			<enumeration value="Guardaroba" />
+			<enumeration value="Visite guidate" />
+			<enumeration value="Bookshop" />
+			<enumeration value="Connessione WI-FI" />
+			<enumeration value="Biblioteca" />
+			<enumeration value="Sala convegni" />
+			<enumeration value="Prestito" />
+			<enumeration value="Guide e cataloghi" />
+			<enumeration value="Spazi espositivi" />
+			<enumeration value="Altro" />
+			<enumeration value="Caffetteria" />
+		</restriction>
+	</simpleType>
+	
+	<annotation>
+		<documentation>
+			Elenco delle categorie di un museo. Descrive i materiali esposti (arte, archeologia, etc.)
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<categorie categoriaPrevalente="Storia">
+					<categoria>Etnografia e antropologia</categoria>
+					<categoria>Storia</categoria>
+				</categorie>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="categorie-musei">
+			<sequence>
+				<element name="categoria" type="tns:categoriaMuseo" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+			<attribute name="categoriaPrevalente" type="tns:categoriaMuseo"  use="optional"/>
+	</complexType>
+
+	<annotation>
+		<documentation>
+			La categoria di un museo è derivata dall'ISTAT. In particolare, le tipologie originali sono le seguenti:
+				1 Arte
+				2 Archeologia
+				3 Storia
+				4 Storia naturale e scienze naturali
+				5 Scienza e tecnica
+				6 Etnografia e antropologia
+				7 Territoriale
+				8 Altro (specificare)
+			E' stata generalizzata la tipologia 8 (da 'Altro (specificare)' a 'Altro')
+		</documentation>
+	</annotation>
+
+	<simpleType name="categoriaMuseo">
+		<restriction base="token">
+			<enumeration value="Arte" />
+			<enumeration value="Archeologia" />
+			<enumeration value="Storia" />
+			<enumeration value="Storia naturale e scienze naturali" />
+			<enumeration value="Scienza e tecnica" />
+			<enumeration value="Etnografia e antropologia" />
+			<enumeration value="Territoriale" />
+			<enumeration value="Altro" />
+		</restriction>
+	</simpleType>
+
+
+	<annotation>
+		<documentation>
+			Elenco delle tipologie di un luogo della cultura p.es. Museo/Area archeologica.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<tipologie tipologiaPrevalente="Museo, galleria non a scopo di lucro e/o raccolta">
+					<tipologia>Museo, galleria non a scopo di lucro e/o raccolta</tipologia>
+					<tipologia>Area archeologica</tipologia>
+				</tipologie>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="tipologie-luoghi">
+			<sequence>
+				<element name="tipologia" type="tns:tipoDiLuogo" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+			<attribute name="tipologiaPrevalente" type="tns:tipoDiLuogo"  use="required"/>
+	</complexType>
+	
+	<annotation>
+		<documentation>
+			Elenco delle Categorie di materiali conservati in un museo.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<categorie categoriaPrevalente="Arte">
+					<categoria>Storia</categoria>
+					<categoria>Etnografia e antropologia</categoria>
+				</categorie>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="categorie-luoghi">
+			<sequence>
+				<element name="categoria" type="tns:categoria" minOccurs="0" maxOccurs="unbounded"/>
+			</sequence>
+			<attribute name="categoriaPrevalente" type="tns:categoria"  use="required"/>
+	</complexType>
+	
+
+	<annotation>
+		<documentation>
+			La tipologia dei luoghi è derivata dall'ISTAT. In particolare, le tipologie originali sono le seguenti:
+				1 Museo, galleria non a scopo di lucro e/o raccolta
+				2 Area archeologica
+				3 Parco archeologico
+				4 Chiesa o edificio di culto
+				5 Villa o palazzo di interesse storico o artistico
+				6 Parco o giardino di interesse storico o artistico
+				7 Monumento funerario
+				8 Architettura fortificata
+				9 Architettura civile
+				10 Monumento di archeologia industriale
+				11 Altro monumento (specificare)
+				12 Altro (specificare)
+			E' stata eliminata la tipologia generica (12) e generalizzata la tipologia 11 (da 'Altro monumento (specificare)' a 'Monumento')
+		</documentation>
+	</annotation>
+
+	<simpleType name="tipoDiLuogo">
+		<restriction base="token">
+			<enumeration value="Museo, galleria non a scopo di lucro e/o raccolta" />
+			<enumeration value="Area archeologica" />
+			<enumeration value="Parco archeologico" />
+			<enumeration value="Monumento" />
+			<enumeration value="Chiesa o edificio di culto" />
+			<enumeration value="Villa o palazzo di interesse storico o artistico" />
+			<enumeration value="Parco o giardino di interesse storico o artistico" />
+			<enumeration value="Monumento funerario" />
+			<enumeration value="Architettura fortificata" />
+			<enumeration value="Architettura civile" />
+			<enumeration value="Monumento di archeologia industriale" />
+			<enumeration value="Biblioteca" />
+			<enumeration value="Archivio" />
+			<enumeration value="Altro" />
+		</restriction>
+	</simpleType>
+
+
+	<annotation>
+		<documentation>
+			Categorie dei materiali esposti nei musei derivata dall'ISTAT
+		</documentation>
+	</annotation>
+	<simpleType name="categoria">
+		<restriction base="token">
+			<enumeration value="Arte" />
+			<enumeration value="Archeologia" />
+			<enumeration value="Storia" />
+			<enumeration value="Storia naturale e scienze naturali" />
+			<enumeration value="Scienza e tecnica" />
+			<enumeration value="Etnografia e antropologia" />
+			<enumeration value="Territoriale" />
+			<enumeration value="Altro" />
+		</restriction>
+	</simpleType>
+
+	<annotation>
+		<documentation>
+			Informazioni (tutte opzionali) su un luogo o un evento.
+		</documentation>
+	</annotation>
+	<complexType name="info">
+			<all>
+				<element name="orario" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="responsabile" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="accessibilita" type="tns:infoAccessibilita" minOccurs="0" maxOccurs="1"/>
+				<element name="sitoweb" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="email-certificata" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="telefono" type="tns:testo" minOccurs="1" maxOccurs="1"/>
+				<element name="fax" type="tns:testo" minOccurs="1" maxOccurs="1"/>
+				<element name="chiusuraSettimanale" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="chiusuraTemporanea" type="tns:chiusuraTemporanea" minOccurs="0" maxOccurs="1"/>
+			</all>
+	</complexType>
+
+	<annotation>
+		<documentation>
+			Informazioni sul costo dei biglietti, le riduzioni possibili e l'orario della biglietteria di un luogo o un evento a pagamento.
+		</documentation>
+	</annotation>
+	<complexType name="biglietteria">
+			<all>
+				<element name="telefono-biglietteria" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="fax-biglietteria" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="email-biglietteria" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="costo" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="riduzioni" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="orario-biglietteria" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+			</all>
+	</complexType>
+	
+	<annotation>
+		<documentation>
+			Informazioni relative al sistema di prenotazione (telefonica e/o online). E' bene precisare che le informazioni contenute
+			in questa sezione sono specifiche della prenotazione e si assume siano diverse da quelle contenute nell'area "informazioni"
+			della struttura.
+		</documentation>
+	</annotation>
+	<complexType name="prenotazioni">
+			<sequence>
+				<element name="sitoweb" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="email" type="string" minOccurs="0" maxOccurs="1"/>
+				<element name="telefono" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+				<element name="fax" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+			<attribute name="tipo" type="tns:tipoDiPrenotazione"/>
+	</complexType>
+
+	<simpleType name="tipoDiPrenotazione">
+		<restriction base="token">
+			<enumeration value="Obbligatoria" />
+			<enumeration value="Facoltativa" />
+			<enumeration value="Nessuna" />
+		</restriction>
+	</simpleType>
+
+	<annotation>
+		<documentation>
+			Indicazione di un link internet. Un link è rappresentato da un testo descrittivo (eventualemente vuoto) e da un url (attributo "url").
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<link url="http://www.beniculturali.it">Sito ufficiale del Ministero per i Beni e le Attività Culturali</link>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<complexType name="link">
+		<sequence>
+			<element name="url" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="titolo" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="descrizione" type="string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+		<attribute name="tipo" type="tns:tipoLink"/>
+	</complexType>
+	
+	<simpleType name="tipoLink">
+		<restriction base="token">
+			<enumeration value="Sito Web" />
+			<enumeration value="Documento" />
+			<enumeration value="Facebook" />
+			<enumeration value="Twitter" />
+			<enumeration value="YouTube" />
+			<enumeration value="Instagram" />
+			<enumeration value="LinkedIn" />
+			<enumeration value="Flickr" />
+			<enumeration value="Google+" />
+		</restriction>
+	</simpleType>
+	
+	<annotation>
+		<documentation>
+			Un "mediafile" rappresenta un file esposto su internet e associato ad una entità. Esempi si media file sono le immagini di un luogo
+			un pdf allegato ad un evento (p.es. invito), etc. 
+		</documentation>
+	</annotation>
+	<complexType name="mediaFile">
+		<sequence>
+			<element name="url" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="didascalia" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="descrizione" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="copyright" type="tns:mediaCopyright" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+		<attribute name="ruolo" type="tns:mediaRole" use="optional" />
+		<attribute name="mime-type" type="string" use="optional" />
+		<attribute name="size" type="integer" use="optional" />
+		<attribute name="index" type="integer" use="optional" />
+		<attribute name="mibacid" type="integer"  use="optional"/>
+	</complexType>
+	
+	<complexType name="mediaCopyright">
+		<sequence>
+			<element name="proprietario" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="anno" type="string" minOccurs="0" maxOccurs="1"/>
+			<element name="testo" type="string" minOccurs="0" maxOccurs="1"/>
+		</sequence>
+	</complexType>
+	
+	<simpleType name="mediaRole">
+		<restriction base="token">
+			<enumeration value="Immagine: Principale" />
+			<enumeration value="Immagine: Galleria" />
+			<enumeration value="Immagine: Banner" />
+			<enumeration value="Immagine: Screenshot" />
+			<enumeration value="Immagine: Manifesto" />
+			<enumeration value="Video: Notizia" />
+			<enumeration value="Video: Intervista" />
+			<enumeration value="Video: Guida" />
+			<enumeration value="Video: Spettacolo" />
+			<enumeration value="Video: Documentario" />
+			<enumeration value="Video: Spot pubblicitario" />
+			<enumeration value="Video: Evento" />
+			<enumeration value="Audio: Notizia" />
+			<enumeration value="Audio: Intervista" />
+			<enumeration value="Audio: Concerto" />
+			<enumeration value="Audio: Musica" />
+			<enumeration value="Audio: Guida" />
+			<enumeration value="Audio: Spot pubblicitario" />
+			<enumeration value="Documento: Statuto" />
+			<enumeration value="Documento: Carta dei servizi" />
+			<enumeration value="Documento: Rassegna stampa" />
+			<enumeration value="Documento: Invito" />
+			<enumeration value="Documento: Allegato" />
+			<enumeration value="Documento: Rilevazione Accessibilità" />
+			<enumeration value="Documento: Certificato Herity" />
+			<enumeration value="Documento: Curriculum e retribuzioni" />
+		</restriction>
+	</simpleType>
+	
+	
+	<simpleType name="operazione">
+		<restriction base="token">
+			<enumeration value="Aggiornamento" />
+			<enumeration value="Rimozione" />
+		</restriction>
+	</simpleType>
+	
+	<annotation>
+		<documentation>
+			La prima sezione dei file XML in oggetto (mibac/metainfo) è costituita da un insieme di informazioni riguardanti lo stato 
+			del record nel sistema informativo di origine, la data di creazione del file, una indicazione della sorgente che ha
+			prodotto il file. Questa sezione è destinata a contenere anche eventuali erorri generati durante il processo di generazione
+			del file stesso.
+		</documentation>
+	</annotation>
+	<complexType name="envelope">
+			<sequence>
+				<element name="workflow" type="tns:workflow" minOccurs="1" maxOccurs="1"/>
+				<element name="datacreazionexml" type="dateTime" minOccurs="1" maxOccurs="1"/>
+				<element name="sorgente" type="string" minOccurs="1" maxOccurs="1"/>
+				<element name="operazione" type="tns:operazione" minOccurs="0" maxOccurs="1"/>
+				<element name="errore"  minOccurs="0" maxOccurs="1">
+					<complexType>
+						<sequence>
+							<element name="descrizione" type="string" minOccurs="1" maxOccurs="1" />
+						</sequence>
+						<attribute name="id" type="string"  use="optional"/>
+						<attribute name="type" type="string" use="optional" />
+					</complexType>
+				</element>
+			</sequence>
+	</complexType>
+	
+	
+	<annotation>
+		<documentation>
+			LUOGO DELLA CULTURA
+		</documentation>
+	</annotation>
+	<complexType name="luogo">
+				<sequence>
+					<element name="identificatore" type="tns:codici" minOccurs="1" maxOccurs="1"/>
+					<element name="tipologie" type="tns:tipologie-luoghi" minOccurs="1" maxOccurs="1"/>
+					<element name="categorie" type="tns:categorie-luoghi" minOccurs="1" maxOccurs="1"/>
+					<element name="proprieta" type="tns:tipoDiProprieta" minOccurs="0" maxOccurs="1"/>
+					<element name="denominazione" type="tns:denominazione" minOccurs="1" maxOccurs="1"/>
+					<element name="descrizione" type="tns:testo" minOccurs="1" maxOccurs="1"/>
+					<element name="info" type="tns:info" minOccurs="1" maxOccurs="1"/>
+					<element name="enteCompetente" type="tns:riferimentoEnte" minOccurs="0" maxOccurs="1"/>
+					<element name="enteGestore" type="tns:riferimentoEnte" minOccurs="0" maxOccurs="1"/>
+					<element name="contenitori" type="tns:contenitori" minOccurs="0" maxOccurs="1"/>
+					<element name="servizi" type="tns:servizi" minOccurs="0" maxOccurs="1"/>
+					<element name="biglietteria" type="tns:biglietteria" minOccurs="0" maxOccurs="1"/>
+					<element name="prenotazioni" type="tns:prenotazioni" minOccurs="0" maxOccurs="1"/>
+					<element name="indirizzi" minOccurs="1" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="indirizzo" type="tns:localizzazione" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="links" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="link" type="tns:link" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="allegati" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="file" type="tns:mediaFile" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+	</complexType>
+
+
+	<annotation>
+		<documentation>
+			Il tipo di proprietà di un luogo corrisponde alla "forma giuridica" dell'ISTAT
+				1 Amministrazione dello Stato (specificare)
+				2 Regione
+				3 Provincia
+				4 Comune
+				5 Comunità montana o isolana
+				6 Unione di Comuni
+				7 Istituto o scuola di ogni ordine e grado
+				8 Università statale
+				9 Istituto o ente di ricerca
+				10 Consorzio di diritto pubblico
+				11 Altro ente pubblico (specificare)
+				12 Ente ecclesiastico o religioso
+				13 Società di persone o capitali
+				14 Società cooperativa
+				15 Consorzio o altra forma di cooperazione
+				16 Associazione riconosciuta
+				17 Fondazione (esclusa fondazione bancaria)
+				18 Università non statale
+				19 Privato cittadino
+				20 Altro soggetto privato (specificare)
+		</documentation>
+	</annotation>
+
+	<simpleType name="tipoDiProprieta">
+		<restriction base="token">
+			<enumeration value="Amministrazione dello Stato" />
+			<enumeration value="Regione" />
+			<enumeration value="Provincia" />
+			<enumeration value="Comune" />
+			<enumeration value="Comunità montana o isolana" />
+			<enumeration value="Unione di Comuni" />
+			<enumeration value="Istituto o scuola di ogni ordine e grado" />
+			<enumeration value="Università statale" />
+			<enumeration value="Istituto o ente di ricerca" />
+			<enumeration value="Consorzio di diritto pubblico" />
+			<enumeration value="Altro ente pubblico" />
+			<enumeration value="Ente ecclesiastico o religioso" />
+			<enumeration value="Società di persone o capitali" />
+			<enumeration value="Società cooperativa" />
+			<enumeration value="Consorzio o altra forma di cooperazione" />
+			<enumeration value="Associazione riconosciuta" />
+			<enumeration value="Fondazione" />
+			<enumeration value="Università non statale" />
+			<enumeration value="Privato cittadino" />
+			<enumeration value="Altro soggetto privato" />
+			<enumeration value="Ente MiBAC" />
+			<enumeration value="Non disponibile" />
+		</restriction>
+	</simpleType>	
+	
+	<annotation>
+		<documentation>
+			COMUNICATO
+		</documentation>
+	</annotation>
+	<complexType name="comunicato">
+				<sequence>
+					<element name="identificatore" type="tns:codici" minOccurs="1" maxOccurs="1"/>
+					<element name="tipologia" type="tns:tipoDiComunicato" minOccurs="1" maxOccurs="1"/>
+					<element name="datanotizia" type="date" minOccurs="1" maxOccurs="1"/>
+					<element name="titolo" type="tns:denominazione" minOccurs="1" maxOccurs="1"/>
+					<element name="responsabile" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="fonteDati" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="sommario" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="corpo" type="tns:testo" minOccurs="1" maxOccurs="1"/>
+					<element name="note" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="enteEmittente" type="tns:riferimentoEnte" minOccurs="1" maxOccurs="1"/>
+					<element name="links" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="link" type="tns:link" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="allegati" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="file" type="tns:mediaFile" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+	</complexType>
+	
+	<simpleType name="tipoDiComunicato">
+		<restriction base="token">
+			<enumeration value="Comunicato MiBAC" />
+			<enumeration value="Comunicato Istituto" />
+			<enumeration value="Invito" />
+			<enumeration value="Lancio agenzia" />
+			<enumeration value="Iniziativa" />
+			<enumeration value="Circolare" />
+			<enumeration value="Accordo" />
+			<enumeration value="Corso" />
+			<enumeration value="Intesa" />
+			<enumeration value="Graduatoria Concorso" />
+			<enumeration value="Comunicazione Bando" />
+			<enumeration value="Risultanza Bando" />
+			<enumeration value="Avviso" />
+			<enumeration value="Decreto" />
+		</restriction>
+	</simpleType>
+
+	<annotation>
+		<documentation>
+			ENTE/ISTITUTO/ORGANIZZAZIONE
+		</documentation>
+	</annotation>
+	<complexType name="istituto">
+				<sequence>
+					<element name="identificatore" type="tns:codici" minOccurs="1" maxOccurs="1"/>
+					<element name="tipologia" type="tns:tipoDiEnte" minOccurs="1" maxOccurs="1"/>
+					<element name="denominazione" type="tns:denominazione" minOccurs="1" maxOccurs="1"/>
+					<element name="descrizione" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="missione" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="servizi" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="info" type="tns:info" minOccurs="1" maxOccurs="1"/>
+					<element name="indirizzo" type="tns:localizzazione" minOccurs="0" maxOccurs="1"/>
+					<element name="espi" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="codiceFiscale" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="acronimo" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="links" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="link" type="tns:link" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="allegati" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="file" type="tns:mediaFile" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+	</complexType>
+	
+	<simpleType name="tipoDiEnte">
+		<restriction base="token">
+			<enumeration value="Direzione Regionale" />
+			<enumeration value="Amministrazione dello Stato" />
+			<enumeration value="Regione" />
+			<enumeration value="Provincia" />
+			<enumeration value="Comune" />
+			<enumeration value="Comunità montana o isolana" />
+			<enumeration value="Unione di Comuni" />
+			<enumeration value="Istituto o scuola di ogni ordine e grado" />
+			<enumeration value="Università statale" />
+			<enumeration value="Istituto o ente di ricerca" />
+			<enumeration value="Consorzio di diritto pubblico" />
+			<enumeration value="Altro ente pubblico" />
+			<enumeration value="Ente ecclesiastico o religioso" />
+			<enumeration value="Società di persone o capitali" />
+			<enumeration value="Società cooperativa" />
+			<enumeration value="Consorzio o altra forma di cooperazione" />
+			<enumeration value="Associazione riconosciuta" />
+			<enumeration value="Fondazione" />
+			<enumeration value="Università non statale" />
+			<enumeration value="Privato cittadino" />
+			<enumeration value="Altro soggetto privato" />
+			<enumeration value="Ente MiBAC" />
+			<enumeration value="Non disponibile" />
+			<enumeration value="Biblioteca Statale" />
+			<enumeration value="Direzione Generale" />
+			<enumeration value="Soprintendenza" />
+			<enumeration value="Istituto Statale" />
+			<enumeration value="Biblioteca" />
+			<enumeration value="Struttura Centrale MiBAC" />
+			<enumeration value="Archivio di Stato" />
+			<enumeration value="Istituto Centrale" />
+			<enumeration value="Istituto Nazionale" />
+			<enumeration value="Istituto Autonomo" />
+			<enumeration value="Sopraintendenza Archivistica" />
+		</restriction>
+	</simpleType>
+
+	<annotation>
+		<documentation>
+			EVENTO
+		</documentation>
+	</annotation>
+	<complexType name="evento">
+				<sequence>
+					<element name="identificatore" type="tns:codici" minOccurs="1" maxOccurs="1"/>
+					<element name="tipologia" type="tns:tipoDiEvento" minOccurs="1" maxOccurs="1"/>
+					<element name="titolo" type="tns:denominazione" minOccurs="1" maxOccurs="1"/>
+					<element name="sede" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="descrizione" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="datainizio" type="date" minOccurs="0" maxOccurs="1"/>				
+					<element name="datafine" type="date" minOccurs="0" maxOccurs="1"/>
+					<element name="servizi" type="tns:testo" minOccurs="0" maxOccurs="1"/>
+					<element name="info" type="tns:info" minOccurs="1" maxOccurs="1"/>
+					<element name="grandeEvento" type="boolean" minOccurs="1" maxOccurs="1"/>
+					<element name="eventoRiferimento" type="tns:riferimentoEvento" minOccurs="0" maxOccurs="1"/>
+					<element name="biglietteria" type="tns:biglietteria" minOccurs="0" maxOccurs="1"/>
+					<element name="prenotazioni" type="tns:prenotazioni" minOccurs="0" maxOccurs="1"/>
+					<element name="indirizzi" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="indirizzo" type="tns:localizzazione" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="luoghiCorrelati" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="luogo" type="tns:riferimentoLuogo" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="links" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="link" type="tns:link" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="allegati" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="file" type="tns:mediaFile" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+	</complexType>
+	
+	<complexType name="riferimentoEvento">
+			<sequence>
+				<element name="identificatore" type="tns:codici" minOccurs="0" maxOccurs="1"/>
+				<element name="denominazione" type="string" minOccurs="0" maxOccurs="1"/>
+			</sequence>
+	</complexType>
+	
+	<simpleType name="tipoDiEvento">
+		<restriction base="token">
+			<enumeration value="Altro"/>
+			<enumeration value="Apertura straordinaria" />
+			<enumeration value="Attività didattica" />
+			<enumeration value="Concerto"/>
+			<enumeration value="Convegno/Conferenza" />
+			<enumeration value="Festival"/>
+			<enumeration value="Inaugurazione" />
+			<enumeration value="Incontro/Presentazione" />
+			<enumeration value="Manifestazione fieristica"/>
+			<enumeration value="Manifestazione sportiva" />
+			<enumeration value="Mostra" />
+			<enumeration value="Nuova apertura" />
+			<enumeration value="Proiezione" />
+			<enumeration value="Seminario"/>
+			<enumeration value="Spettacolo di danza" />
+			<enumeration value="Spettacolo teatrale" />
+			<enumeration value="Visita guidata" />
+			<enumeration value="Visita libera"/>
+		</restriction>
+	</simpleType>
+	
+	<annotation>
+		<documentation>
+			BANDO/APPALTO
+		</documentation>
+	</annotation>
+	<complexType name="appalto">
+				<sequence>
+					<element name="identificatore" type="tns:codici" minOccurs="1" maxOccurs="1"/>
+					<element name="tipologia" type="tns:tipoDiAppalto" minOccurs="1" maxOccurs="1"/>
+					<element name="oggetto" type="tns:testo" minOccurs="1" maxOccurs="1"/>
+					<element name="dataEmissione" type="date" minOccurs="1" maxOccurs="1"/>
+					<element name="dataScadenzaPartecipazione" type="date" minOccurs="1" maxOccurs="1"/>
+					<element name="dataPubblicazioneGU" type="date" minOccurs="0" maxOccurs="1"/>
+					<element name="numeroGazzettaUfficiale" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="importoLavori" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="proprieta" type="tns:tipoDiProprieta" minOccurs="1" maxOccurs="1"/>
+					<element name="sedeCantiere" type="tns:localizzazione" minOccurs="0" maxOccurs="1"/>
+					<element name="enteAppaltante" type="tns:riferimentoEnte" minOccurs="1" maxOccurs="1"/>
+					<element name="aggiudicatario" type="string" minOccurs="0" maxOccurs="1"/>
+					<element name="links" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="link" type="tns:link" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+					<element name="allegati" minOccurs="0" maxOccurs="1">
+						<complexType>
+							<sequence>
+								<element name="file" type="tns:mediaFile" minOccurs="1" maxOccurs="unbounded"/>
+							</sequence>
+						</complexType>
+					</element>
+				</sequence>
+	</complexType>
+	
+	<simpleType name="tipoDiAppalto">
+		<restriction base="token">
+			<enumeration value="Bando di gara" />
+			<enumeration value="Avviso di preinformazione di gara" />
+			<enumeration value="Avviso pubblico" />
+		</restriction>
+	</simpleType>
+	<annotation>
+	
+		<documentation>
+			Radice del documento XML.
+		</documentation>
+		<appinfo>
+			<esempio numero="1">
+				<mibac-list>
+					<query>
+						<identificatore>106467</identificatore>
+					</query>
+					<mibac>
+						<metainfo>
+							...
+						</metainfo>
+						<luogo>
+							....
+						</luogo>
+					</mibac>
+				</mibac-list>
+			</esempio>
+			<esempio numero="2">
+			<mibac-list>
+					<query>
+						<identificatore>106467</identificatore>
+					</query>
+					<mibac>
+						<metainfo>
+							...
+						</metainfo>
+						<evento>
+							....
+						</evento>
+					</mibac>
+				</mibac-list>
+			</esempio>
+			<esempio numero="3">
+				<mibac>
+					<metainfo>
+						...
+					</metainfo>
+					<appalto>
+						....
+					</appalto>
+				</mibac>
+			</esempio>
+		</appinfo>
+	</annotation>
+	<element name="mibac-list">
+			<complexType>
+				<sequence>
+					<element name="errore" minOccurs="0" maxOccurs="1">
+							<complexType>
+								<sequence>
+									<element name="messaggio" type="string" minOccurs="1" maxOccurs="1"/>
+								</sequence>
+							</complexType>
+					</element>
+					<element name="query">
+						<complexType>
+							<sequence>
+								<!-- Parametri comuni a tutti i moduli -->
+								<element name="modulo" type="string" minOccurs="1" maxOccurs="1"/>
+								<element name="id" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="keywords" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="utente" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="comune" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="provincia" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="regione" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="modificatoDa" type="dateTime" minOccurs="0" maxOccurs="1"/>
+								<element name="modificatoPrimaDi" type="dateTime" minOccurs="0" maxOccurs="1"/>
+								<element name="rimossi" type="boolean" minOccurs="0" maxOccurs="1"/>
+								<element name="stato" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="quantita" type="integer" minOccurs="0" maxOccurs="1"/>
+								<element name="offset" type="integer" minOccurs="0" maxOccurs="1"/>
+								
+								<!-- Parametri specifici per il modulo Luoghi -->
+								<element name="beniStatali" type="boolean" minOccurs="0" maxOccurs="1"/>
+								<element name="enteCompetente" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="tipologiaProprieta" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="redazione" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="tipologiaLuogo" type="string" minOccurs="0" maxOccurs="1"/>
+								<element name="sorgente" type="string" minOccurs="0" maxOccurs="1"/>
+								
+								<!-- Parametri specifici per il modulo Enti -->
+								
+								<!-- Parametri specifici per il modulo Eventi -->
+								<element name="grandeEvento" type="boolean" minOccurs="0" maxOccurs="1"/>
+								<element name="grandeEventoAppartenente" type="string" minOccurs="0" maxOccurs="1"/>
+								
+								<!-- Parametri specifici per il modulo Comunicati -->
+							</sequence>
+						</complexType>
+					</element>
+					<element name="mibac" minOccurs="0" maxOccurs="unbounded">
+							<complexType>
+								<sequence>
+									<element name="metainfo" type="tns:envelope" minOccurs="1" maxOccurs="1"/>
+									<choice>
+										<element name="evento" type="tns:evento" />
+										<element name="luogodellacultura" type="tns:luogo" />
+										<element name="istituto" type="tns:istituto" />
+										<element name="comunicato" type="tns:comunicato" />
+										<element name="appalto" type="tns:appalto" />
+									</choice>
+								</sequence>
+							</complexType>
+					</element>
+				</sequence>
+				<attribute name="totale" type="string" use="optional"/>
+				<attribute name="partenza" type="string" use="optional"/>
+				<attribute name="numero" type="string" use="optional"/>
+				<attribute name="totaleRitornati" type="string" use="optional"/>
+			</complexType>
+	</element>
+</schema>

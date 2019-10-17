@@ -56,7 +56,7 @@ export class SignupComponent {
             this.notificationService.showError(res['error']);
           } else {
             this.notificationService.showSuccess('Registrazione effettuata con successo.');
-            this.router.navigateByUrl('home/login');
+            this.router.navigateByUrl('/');
           }
         }
       )
