@@ -1,8 +1,7 @@
 import { Component, IterableDiffers } from '@angular/core';
 import { ZBar } from '@ionic-native/zbar/ngx'
-import { Paintings } from '../../interfaces/paintings';
 import { UserService } from '../../services/server/user.service';
-import { NotificationService } from '../../services/client/notification.service';
+import { ClientService } from '../../services/client/client.service';
 import { Router } from '@angular/router';
 import { StorageService } from '../../services/client/storage.service';
 import { User } from '../../interfaces/user';
@@ -38,7 +37,7 @@ export class ScanComponent {
 
   constructor(private storage: StorageService,
     private zbar: ZBar, private userService: UserService,
-    private notificationService: NotificationService, private router: Router,
+    private clientService: ClientService, private router: Router,
     private formBuilder: FormBuilder,
     private tts: TextToSpeech) {
 
@@ -46,16 +45,17 @@ export class ScanComponent {
       flash: 'off',
       drawSight: false
     }
+
+    this.feedbackForm = this.formBuilder.group({
+      rate: new FormControl(),
+    });
     
     
   }
 
   ionViewWillEnter(){
     this.image = "qrscanner.png";
-    this.feedbackForm = this.formBuilder.group({
-      rate: new FormControl('', [
-      ]),
-    });
+    
     this.isAnonymous();
   }
 
@@ -84,9 +84,9 @@ export class ScanComponent {
         }).subscribe(
           res => {
             if (res['error']) {
-              this.notificationService.showError(res['error']);
+              this.clientService.showError(res['error']);
             } else {
-              this.notificationService.showSuccess("Success");
+              this.clientService.showSuccess("Success");
               this.author = res['author'];
               this.title = res['title'];
               this.description = res['description'];
@@ -113,9 +113,9 @@ export class ScanComponent {
       }).subscribe(
         res => {
           if (res['success']) {
-            this.notificationService.showSuccess(res['success']);
+            this.clientService.showSuccess(res['success']);
           } else {
-            this.notificationService.showError(res['error']);
+            this.clientService.showError(res['error']);
           }
         }
       )

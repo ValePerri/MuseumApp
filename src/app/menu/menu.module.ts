@@ -10,6 +10,7 @@ import { AdviceComponent } from './advice/advice.component';
 import { BookingComponent } from './booking/booking.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { YourBookingsComponent } from './your-bookings/your-bookings.component';
+import { DiscoverComponent } from '../menu/discover/discover.component';
 
 @NgModule({
   imports: [
@@ -43,11 +44,15 @@ import { YourBookingsComponent } from './your-bookings/your-bookings.component';
             {
                 path: 'yourbookings',
                 component: YourBookingsComponent
+            },            
+            {
+                path: 'discover',
+                component: DiscoverComponent
             }
         ]
     }
     ])
   ],
-  declarations: [MenuPage, AboutusComponent, ScanComponent, AdviceComponent, BookingComponent, YourBookingsComponent]
+  declarations: [MenuPage, AboutusComponent, ScanComponent, AdviceComponent, BookingComponent, YourBookingsComponent, DiscoverComponent]
 })
 export class MenuPageModule {}

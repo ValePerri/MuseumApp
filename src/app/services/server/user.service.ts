@@ -10,6 +10,7 @@ import { StorageService } from '../client/storage.service';
 import { Paintings } from '../../interfaces/paintings';
 import { feedbackForm } from '../../interfaces/feedback-form';
 import { museums } from 'src/app/interfaces/museums';
+import { library } from 'src/app/interfaces/library';
 @Injectable({
     providedIn: 'root'
 })
@@ -85,6 +86,15 @@ export class UserService {
     public getadvice(data):  Observable<museums>{ 
         console.log(data)
         return this.http.post('/advice', data, {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        });
+    }   
+
+    public getMost(data):  Observable<library>{ 
+        console.log(data)
+        return this.http.post('/most', data, {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
             })

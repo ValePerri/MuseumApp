@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/server/user.service';
 import { StorageService } from '../../services/client/storage.service';
-import { NotificationService } from '../../services/client/notification.service';
+import { ClientService } from '../../services/client/client.service';
 import { Time } from '@angular/common';
 
 @Component({
@@ -14,7 +14,7 @@ export class YourBookingsComponent{
   lista: any
   name: any
 
-  constructor(private storage: StorageService, private userService: UserService, private notificationService: NotificationService) {
+  constructor(private storage: StorageService, private userService: UserService, private clientService: ClientService) {
     
   }
 
@@ -34,7 +34,7 @@ export class YourBookingsComponent{
       }).subscribe(
         res => {
           if (res['error']) {
-            this.notificationService.showError(res['error']);
+            this.clientService.showError(res['error']);
           } else {
             console.log(res);
             this.lista = res;
@@ -57,11 +57,11 @@ export class YourBookingsComponent{
       }).subscribe(
         res => {          
           if (res['error']) {
-            this.notificationService.showError(res['error']);
+            this.clientService.showError(res['error']);
           } else {
             console.log(res);
             this.lista = res;
-            this.notificationService.showSuccess("Booking removed with success");
+            this.clientService.showSuccess("Booking removed with success");
           }
         }
       )

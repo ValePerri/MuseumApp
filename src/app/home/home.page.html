@@ -24,7 +24,7 @@
                 (keyup.enter)="onLogin()" placeholder="Username">
               </ion-input>
             </ion-item>
-            <ion-item lines="none" tabindex="2">
+            <ion-item lines="none" tabindex="">
               <ion-checkbox color = "primary" slot="end" #showPassword></ion-checkbox>
               <ion-input #password formControlName="password" required="true"
                 [type]="showPassword.checked ? 'text' : 'password'" type="password" (keyup.enter)="onLogin()"
@@ -40,7 +40,7 @@
             </div>
           </ion-row>
           <ion-row>
-            <p>If yout don't want to sign in click <ion-button color="primary" fill = "clear" type="submit" (click) = "anonimUser()" >Here</ion-button></p>
+            <p>Access with default references and restricted functionalities click <ion-button color="primary" fill = "clear" type="submit" (click) = "anonimUser()" >Here</ion-button></p>
           </ion-row>
         </ion-col>
       </ion-row>

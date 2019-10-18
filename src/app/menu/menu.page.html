@@ -12,55 +12,52 @@
   <img src="../../assets/backpiccolo.png">
 
 
-  
-  <ion-slides padding pager="true" loop="true">   
-    
-    
-    <ion-slide>
-        <img src="../../assets/book.png" />
-      <ion-card> 
-        <ion-card-content>            
-        <h3><b>Add Bookings</b></h3>
-        <h2>Plan your visit to our museum by home, avoiding queues at the ticket office.</h2>       
-        <ion-button [disabled] = "!isenabled" fill = "outline"  padding [routerLink]="['./booking']"> Click   </ion-button>
-        </ion-card-content>
-      </ion-card>
-    
-    </ion-slide>
+
+  <ion-slides padding pager="true" loop="true">
 
     <ion-slide>
       <img src="../../assets/qr.png" />
-      <ion-card> 
-          <ion-card-content>  
-      <h3><b>Scan the QR-Code</b></h3>
-      <h2>Scan the QR CODE next the paintings to get more informations about it.</h2>
-      <ion-button fill = "outline"  padding [routerLink]="['./scan']"> Click   </ion-button>
+      <ion-card>
+        <ion-card-content>
+          <h3><b>Scan the QR-Code</b></h3>
+          <h2>Scan the QR CODE next the paintings to get more informations about it.</h2>
+          <ion-button fill="outline" padding [routerLink]="['./scan']"> Click </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-slide>
 
     <ion-slide>
-      <img src="../../assets/rating.png" />
-      <ion-card > 
-          <ion-card-content> 
-      <h3><b>Rate the painting</b></h3>
-      <h2>Rate the painting based on your liking.</h2>
-      <ion-button [disabled] = "!isenabled" fill = "outline"  padding [routerLink]="['./scan']"> Click   </ion-button>
+      <img src="../../assets/book.png" />
+      <ion-card>
+        <ion-card-content>
+          <h3><b>Add Bookings</b></h3>
+          <h2>Plan your visit to our museum by home, avoiding queues at the ticket office.</h2>
+          <ion-button [disabled]="!isenabled" fill="outline" padding [routerLink]="['./booking']"> Click </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-slide>
 
     <ion-slide>
       <img src=".../../assets/advice_icon.png" />
-      <ion-card> 
-          <ion-card-content> 
-      <h3><b>Receive our advice</b></h3>
-      <h2>You will receive our advice on the next museums to visit based on the preferences expressed by you.</h2>
-      <ion-button [disabled] = "!isenabled" fill = "outline" padding [routerLink]="['./advice']"> Click   </ion-button>
+      <ion-card>
+        <ion-card-content>
+          <h3><b>Receive our advice</b></h3>
+          <h2>You will receive our advice on the next museums to visit based on the preferences expressed by you.</h2>
+          <ion-button [disabled]="!isenabled" fill="outline" padding [routerLink]="['./advice']"> Click </ion-button>
         </ion-card-content>
       </ion-card>
     </ion-slide>
 
+    <ion-slide>
+        <img src=".../../assets/discover.png" />
+        <ion-card>
+          <ion-card-content>
+            <h3><b>Discover!</b></h3>
+            <h2>Discover new paintings every day!</h2>
+            <ion-button fill="outline" padding [routerLink]="['./discover']"> Click </ion-button>
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
 
   </ion-slides>
 

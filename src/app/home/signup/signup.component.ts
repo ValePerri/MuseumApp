@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/server/user.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../services/client/notification.service';
+import { ClientService } from '../../services/client/client.service';
 import { MenuController } from '@ionic/angular';
 
 @Component({
@@ -18,7 +18,7 @@ export class SignupComponent {
     public router: Router,
     public formBuilder: FormBuilder,
     public userService: UserService,
-    public notificationService: NotificationService,
+    public notificationService: ClientService,
     private menu: MenuController) {
 
     this.menu.enable(false, "custom");

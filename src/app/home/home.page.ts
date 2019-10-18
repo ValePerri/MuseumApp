@@ -2,7 +2,7 @@ import { Component, OnInit, SystemJsNgModuleLoader } from '@angular/core';
 import { UserService } from '../services/server/user.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotificationService } from '../services/client/notification.service';
+import { ClientService } from '../services/client/client.service';
 import { StorageService } from '../services/client/storage.service'
 import { MenuController } from '@ionic/angular';
 
@@ -17,7 +17,7 @@ export class HomePage {
 
   constructor(private storage: StorageService,
     private router: Router, private formBuilder: FormBuilder,
-    private userService: UserService, private notificationService: NotificationService,
+    private userService: UserService, private clientService: ClientService,
     private menu: MenuController) {
 
     this.menu.enable(false, "custom");
@@ -45,7 +45,7 @@ export class HomePage {
     }).subscribe(
       res => {
         if (res['exists']) {
-          this.notificationService.showSuccess('Login effettuato!');
+          this.clientService.showSuccess('Login effettuato!');
           this.storage.setUser({
             username: this.loginForm.value.username,
             password: this.loginForm.value.password,
@@ -54,7 +54,7 @@ export class HomePage {
           this.router.navigateByUrl('/menu');
           this.loginForm.reset();
         } else {
-          this.notificationService.showError(res['error']);
+          this.clientService.showError(res['error']);
         }
       }
     )

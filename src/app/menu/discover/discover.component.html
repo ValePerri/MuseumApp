@@ -1,3 +1,45 @@
-<p>
-  discover works!
-</p>
+<ion-content center text-center>
+
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-buttons slot="end">
+          <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Menù</ion-title>
+        <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+  
+    <ion-grid>
+      <ion-card>
+        <img src="../../../assets/discover_theme.jpg" />
+        <ion-card-header>
+          <ion-icon name="logo-angular" slot="start"></ion-icon>
+          <ion-card-subtitle>Museum Application </ion-card-subtitle>
+          <div text-center>
+            <ion-card-title>
+              <h3><b>{{name}}</b> Discover most viewed paintings</h3>
+            </ion-card-title>
+          </div>
+        </ion-card-header>
+  
+  
+  
+        <ion-list inset>
+          <ion-item *ngFor="let item of lista" center>
+            <div padding>
+              <div text-center>
+                <h1><b>{{item.title}}</b> {{item.artist}}</h1>
+              </div>
+              <img src={{item.image}} width="100" height="auto" />
+            </div>
+          </ion-item>
+        </ion-list>
+  
+      </ion-card>
+    </ion-grid>
+  
+  
+  </ion-content>

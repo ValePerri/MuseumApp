@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NotificationService } from '../../services/client/notification.service';
+import { ClientService } from '../../services/client/client.service';
 import { UserService } from '../../services/server/user.service';
 import { StorageService } from '../../services/client/storage.service';
 import { User } from 'src/app/interfaces/user';
@@ -17,7 +17,7 @@ export class BookingComponent {
   user: User;
   isenabled: boolean 
 
-  constructor(private storage: StorageService, private router: Router, private formBuilder: FormBuilder, private userService: UserService, private notificationService: NotificationService) {
+  constructor(private storage: StorageService, private router: Router, private formBuilder: FormBuilder, private userService: UserService, private clientService: ClientService) {
     this.bookingForm = this.formBuilder.group({
       time: new FormControl(),
       date: new FormControl(),
@@ -55,9 +55,9 @@ export class BookingComponent {
       }).subscribe(
         res => {
           if (res['success']) {
-            this.notificationService.showSuccess(res['success']);
+            this.clientService.showSuccess(res['success']);
           } else {
-            this.notificationService.showError(res['error']);
+            this.clientService.showError(res['error']);
           }
         }
       )
